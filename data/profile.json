@@ -1,0 +1,155 @@
+{
+  "profile": {
+    "name": "Teguh Saputra Monoarfa",
+    "nick": "Tpy",
+    "location": "Jakarta, Indonesia",
+    "email": "teguhsaputra412@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/teguhsaputra412/",
+    "whatsapp": "https://api.whatsapp.com/send/?phone=6282291648646&text&type=phone_number&app_absent=0",
+    "resumeUrl": "/CV_Teguh_Saputra_Monoarfa.pdf",
+    "photo": null
+  },
+  "content": {
+    "brand": "Teguh Web Portfolio",
+    "status": "Open to opportunities · Growth · BizOps · AI Ops",
+    "ai_h": "Ask my AI anything <span class=\"grad\">about my experience.</span>",
+    "ai_tag": "This portfolio has a built-in AI assistant trained on my resume. Get straight answers about my work, impact, and skills — before we even talk.",
+    "ai_hello": "Hi! I'm Teguh's AI assistant, and I know his resume inside out. Ask me about his experience, impact, projects, or how he works with AI. 👋",
+    "suggest": [],
+    "ai_ph": "Type your question…  e.g. What are his biggest achievements?",
+    "hero_h1": "Growth &amp; <em>Business Operations</em> generalist who builds with AI.",
+    "role": "Product Consultant & Implementation · KantorKu HRIS (Dealls)",
+    "bio": "Built a Customer Experience function from the ground up at a B2B SaaS, led CS teams across regional e-commerce (Lazada PH, Temu EU), and run operations across tooling, data, and AI. I think in CSAT, churn, retention, and adoption — then build the dashboards and AI agents that move them, learning and shipping with AI every day.",
+    "chips": [
+      "CX Strategy",
+      "Analytics",
+      "AI Agents",
+      "Prompt Engineering",
+      "Implementation"
+    ],
+    "metrics": [
+      {
+        "display": "97.9%",
+        "cap": "CSAT achieved (KantorKu)"
+      },
+      {
+        "display": "300+",
+        "cap": "companies onboarded to HRIS"
+      },
+      {
+        "display": "6,000+",
+        "cap": "headcount under management"
+      },
+      {
+        "display": "82%",
+        "cap": "fewer Tier-2 escalations (Temu)"
+      }
+    ],
+    "exp": [
+      {
+        "yr": "Nov 2024 — now",
+        "role": "Product Consultant & Implementation Specialist",
+        "co": "Dealls · KantorKu HRIS (B2B SaaS)",
+        "d": "Rebuilt the CX function end-to-end; ran the CSAT dashboard & weekly reporting (97.9% CSAT, 82.4% ISS); led HRIS implementation across 300+ companies / 6,000+ headcount with <15-day time-to-value & 100% retention; owned prompt engineering & deployment of the KIRA AI agent."
+      },
+      {
+        "yr": "Jun — Nov 2024",
+        "role": "Customer Service Team Leader",
+        "co": "Transcosmos · Lazada (PH Market)",
+        "d": "Led 15 agents to 71.85% CSAT; daily coaching & calibration. Fast-tracked from SME to Team Leader in 2 months."
+      },
+      {
+        "yr": "Jan — Jun 2024",
+        "role": "Customer Resolution Senior Specialist (Tier 2)",
+        "co": "Teleperformance · Temu (EU Market)",
+        "d": "Handled complex Tier 2 escalations; authored documentation that cut Tier 2 escalation volume by 82%. Promoted Tier 1 → Tier 2 in 1 month."
+      }
+    ],
+    "edu": [
+      {
+        "school": "Universitas Negeri Gorontalo (UNG)",
+        "meta": "Bachelor of Communication · 2016 – 2023",
+        "gpa": "GPA 3.65 / 4.00"
+      }
+    ],
+    "cert": [
+      "BISINDO Level 2 — Indonesian Sign Language (2026)",
+      "Alibaba Cloud Academy — Big Data Certified (2024)",
+      "DBS Foundation Coding Camp — ML Developer (2024)",
+      "Indosat IOH ID.CAMP — Data Scientist Program (2023)",
+      "Lintasarta Cloudeka Digischool — ML Program (2023)"
+    ],
+    "skills": [
+      "Prompt Engineering",
+      "AI Agents",
+      "Python",
+      "SQL",
+      "Tableau",
+      "Excel / Sheets",
+      "Google Apps Script",
+      "Vercel",
+      "Netlify",
+      "CX Strategy",
+      "Churn & Retention",
+      "KPI & Reporting",
+      "Vendor Evaluation",
+      "JIRA",
+      "Confluence",
+      "Coda"
+    ],
+    "beyond": [
+      {
+        "t": "🤖 Learning & Building with AI",
+        "d": "Daily AI use, prompt engineering & agent building as a long-term focus."
+      },
+      {
+        "t": "⚙️ Vibe Coding",
+        "d": "Ships dashboards & internal tools with AI — no formal dev background."
+      },
+      {
+        "t": "🧰 AI Platforms",
+        "d": "Claude, ChatGPT, Gemini, Deepseek, Ollama, Groq."
+      }
+    ],
+    "proj": [
+      {
+        "name": "KIRA — CX AI Agent",
+        "cap": "📸 KIRA agent screenshot",
+        "desc": "Prompt engineering & integration of an internal AI agent, now a daily tool across teams.",
+        "tag": "AI · Prompt Engineering",
+        "img": null
+      },
+      {
+        "name": "Knowledge Base Dashboard",
+        "cap": "📸 KB dashboard screenshot",
+        "desc": "FAQs, KB articles & video tutorials in one product knowledge hub.",
+        "tag": "Vercel · Knowledge Mgmt",
+        "img": null
+      },
+      {
+        "name": "CX Analytics Dashboard",
+        "cap": "📸 CSAT/ISS dashboard",
+        "desc": "CSAT & ISS analytics: KPI cards, trends, leaderboard, Voice of Customer.",
+        "tag": "Data Viz · Reporting",
+        "img": null
+      },
+      {
+        "name": "Client Analytics Dashboard",
+        "cap": "📸 client dashboard",
+        "desc": "Client database with churn, renewal & retention tracking.",
+        "tag": "Analytics · Retention",
+        "img": null
+      },
+      {
+        "name": "User Onboarding Program",
+        "cap": "📸 onboarding flow",
+        "desc": "End-to-end onboarding & training, translating business needs into product solutions.",
+        "tag": "Implementation · Enablement",
+        "img": null
+      }
+    ],
+    "custom": [],
+    "cta_h": "Let's talk.",
+    "cta_p": "Open to Growth, BizOps & AI-focused roles."
+  }
+}

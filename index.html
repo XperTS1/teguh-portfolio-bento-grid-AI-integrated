@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teguh Web Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0f20; --card:#121833; --card-2:#19203f; --line:#27305a;
+  --ink:#eef1fb; --ink-2:#9aa4cc; --ink-3:#5e6a96;
+  --indigo:#7c83ff; --indigo-solid:#5b63f0; --ocean:#2ed3e6; --ocean-2:#38bdf8;
+  --on-accent:#ffffff; --glow1:rgba(124,131,255,.18); --glow2:rgba(46,211,230,.13);
+  --radius:20px;
+}
+[data-theme="light"]{
+  --bg:#eef2fb; --card:#ffffff; --card-2:#f3f6fd; --line:#e0e7f5;
+  --ink:#141a33; --ink-2:#4d5677; --ink-3:#6f78a0;
+  --indigo:#4338ca; --indigo-solid:#4f46e5; --ocean:#0a85a8; --ocean-2:#0ea5e9;
+  --on-accent:#ffffff; --glow1:rgba(79,70,229,.14); --glow2:rgba(8,145,178,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;background-image:radial-gradient(circle at 12% -5%,var(--glow1),transparent 42%),radial-gradient(circle at 92% 6%,var(--glow2),transparent 38%);background-attachment:fixed;transition:background-color .35s,color .35s}
+.wrap{max-width:1180px;margin:0 auto;padding:30px 22px 80px}
+.num-feat{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+a{color:inherit;text-decoration:none}
+[contenteditable="true"]{outline:1px dashed var(--indigo);outline-offset:3px;border-radius:4px;cursor:text}
+svg{display:block}
+
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:14px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;letter-spacing:-.02em}
+.brand .dot{width:11px;height:11px}
+.brand .grad{background:linear-gradient(100deg,var(--indigo),var(--ocean));-webkit-background-clip:text;background-clip:text;color:transparent}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--ocean);box-shadow:0 0 12px var(--ocean);animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.status{font-size:12.5px;color:var(--ink-2);display:flex;align-items:center;gap:8px;margin-right:2px}
+.iconbtn{height:38px;width:42px;border:1px solid var(--line);background:var(--card);border-radius:11px;color:var(--ink);cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center}
+.iconbtn:hover{border-color:var(--indigo)}
+.iconbtn.active{background:var(--indigo-solid);color:var(--on-accent);border-color:var(--indigo-solid)}
+
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.cell{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;position:relative;overflow:hidden;opacity:0;transform:translateY(14px);animation:rise .6s cubic-bezier(.2,.7,.2,1) forwards;transition:border-color .2s,transform .25s,background-color .35s}
+@keyframes rise{to{opacity:1;transform:none}}
+body.loaded .cell{animation:none;opacity:1;transform:none}
+.cell:hover{border-color:var(--indigo)}
+.label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.label::before{content:"";width:5px;height:5px;background:var(--ocean);border-radius:1px}
+
+.c-ai{grid-column:span 12}
+.c-hero{grid-column:span 8}
+.c-photo{grid-column:span 4;display:flex;flex-direction:column;justify-content:flex-end;min-height:230px;background:linear-gradient(160deg,var(--card-2),var(--card))}
+.c-metric{grid-column:span 3}
+.c-exp{grid-column:span 7}
+.c-edu{grid-column:span 5}
+.c-skills{grid-column:span 7}
+.c-extra{grid-column:span 5}
+.c-proj{grid-column:span 12}
+.c-custom{grid-column:span 6}
+.c-cta{grid-column:span 12;background:linear-gradient(120deg,color-mix(in srgb,var(--indigo) 16%,var(--card)),var(--card));border-color:var(--indigo)}
+
+/* AI hero (centerpiece) */
+.c-ai{padding:30px;background:radial-gradient(circle at 0% 0%,color-mix(in srgb,var(--indigo) 24%,var(--card)),transparent 55%),radial-gradient(circle at 100% 100%,color-mix(in srgb,var(--ocean) 18%,var(--card)),transparent 55%),var(--card);border-color:transparent;box-shadow:0 0 0 1px var(--line),0 24px 60px -26px var(--glow1)}
+.c-ai::before{content:"";position:absolute;inset:0;border-radius:var(--radius);padding:1.5px;background:linear-gradient(120deg,var(--indigo),var(--ocean),var(--indigo));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.6;background-size:200% 200%;animation:shift 6s linear infinite;pointer-events:none}
+@keyframes shift{to{background-position:200% 200%}}
+.ai-main{display:flex;gap:30px;align-items:center}
+.ai-left{flex:1;min-width:0}
+.ai-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--indigo);border:1px solid color-mix(in srgb,var(--indigo) 40%,transparent);padding:5px 11px;border-radius:30px;margin-bottom:14px}
+.ai-badge .b{width:7px;height:7px;border-radius:50%;background:var(--ocean);box-shadow:0 0 10px var(--ocean);animation:pulse 1.8s infinite}
+.c-ai h2{font-weight:800;font-size:clamp(26px,3.6vw,40px);letter-spacing:-.025em;line-height:1.06;margin-bottom:8px}
+.c-ai h2 .grad{background:linear-gradient(100deg,var(--indigo),var(--ocean));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ai-tag{font-size:14.5px;color:var(--ink-2);margin-bottom:20px;max-width:60ch}
+.ai-input{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.ai-input input{flex:1;min-width:200px;background:var(--card-2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;color:var(--ink);font-family:inherit;font-size:15.5px;outline:none}
+.ai-input input:focus{border-color:var(--indigo);box-shadow:0 0 0 3px color-mix(in srgb,var(--indigo) 18%,transparent)}
+.ai-input button{background:linear-gradient(100deg,var(--indigo-solid),var(--ocean));border:0;border-radius:14px;padding:0 28px;color:#fff;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.2s}
+.ai-input button:hover{filter:brightness(1.08)}
+.ai-input button:disabled{opacity:.5;cursor:wait}
+.suggest{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:2px;align-items:center}
+.suggest button{font-size:12px;font-weight:500;padding:6px 12px;background:transparent;border:1px solid var(--line);border-radius:20px;color:var(--ink-2);cursor:pointer;transition:.2s}
+.suggest button:hover{border-color:var(--ocean);color:var(--ocean)}
+.suggest .sedit{font-size:12px;font-weight:500;padding:6px 12px;border:1px solid var(--line);border-radius:20px;color:var(--ink-2);position:relative}
+.chatbox{margin-top:18px;display:none;flex-direction:column;gap:10px;max-height:360px;overflow-y:auto;padding-top:4px}
+.chatbox.show{display:flex}
+.msg{font-size:14px;padding:11px 15px;border-radius:13px;max-width:80%;line-height:1.55}
+.msg.bot{background:var(--card-2);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:4px}
+.msg.me{background:var(--indigo-solid);color:var(--on-accent);align-self:flex-end;border-bottom-right-radius:4px;font-weight:500}
+.typing{display:flex;gap:4px;padding:3px 0}
+.typing span{width:6px;height:6px;background:var(--ink-3);border-radius:50%;animation:bk 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes bk{0%,60%,100%{opacity:.25}30%{opacity:1}}
+.ai-orb{width:210px;height:210px;position:relative;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.ai-orb .core{width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 34% 28%,var(--ocean),var(--indigo-solid) 70%);box-shadow:0 0 60px -6px var(--indigo);display:flex;align-items:center;justify-content:center;font-size:34px;animation:bob 4.5s ease-in-out infinite;z-index:2}
+.ai-orb .ring{position:absolute;border-radius:50%;border:1px solid color-mix(in srgb,var(--indigo) 55%,transparent);animation:ripple 3s ease-out infinite}
+.ai-orb .ring:nth-child(2){animation-delay:1s}.ai-orb .ring:nth-child(3){animation-delay:2s}
+@keyframes ripple{0%{width:96px;height:96px;opacity:.7}100%{width:210px;height:210px;opacity:0}}
+@keyframes bob{0%,100%{transform:translateY(-6px)}50%{transform:translateY(6px)}}
+
+/* hero */
+.c-hero h1{font-weight:800;font-size:clamp(21px,2.7vw,30px);line-height:1.12;letter-spacing:-.02em;margin:6px 0 14px}
+.c-hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--indigo),var(--ocean));-webkit-background-clip:text;background-clip:text;color:transparent}
+.role{font-size:14px;font-weight:700;margin-bottom:16px;background:linear-gradient(100deg,var(--indigo),var(--ocean));-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.bio{color:var(--ink-2);font-size:15px;max-width:60ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;align-items:center}
+.chip{font-size:12px;font-weight:500;padding:5px 12px;border:1px solid var(--line);border-radius:30px;color:var(--ink-2);position:relative}
+
+.photo-ph{flex:1;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:13px;border-bottom:1px dashed var(--line);margin:-24px -24px 16px;border-radius:var(--radius) var(--radius) 0 0;font-weight:500;background-size:cover;background-position:center;min-height:150px;text-align:center}
+.photo-ph.editable{cursor:pointer}
+.photo-name{font-weight:800;font-size:25px;letter-spacing:-.01em}
+.photo-loc{font-size:13px;color:var(--ink-2)}
+
+.c-metric .num{font-weight:800;font-size:clamp(28px,3.6vw,40px);letter-spacing:-.03em;line-height:1}
+.c-metric .num .suf{background:linear-gradient(100deg,var(--indigo),var(--ocean));-webkit-background-clip:text;background-clip:text;color:transparent}
+.c-metric .cap{font-size:13px;color:var(--ink-2);margin-top:7px}
+.c-metric:hover{transform:translateY(-3px)}
+.addcard{display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--indigo);border:1px dashed var(--indigo);background:transparent;cursor:pointer;min-height:90px}
+
+.skillrow{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.sk{font-size:12.6px;font-weight:500;padding:7px 12px;background:var(--card-2);border:1px solid var(--line);border-radius:10px;transition:.2s;position:relative}
+.sk:hover{border-color:var(--ocean)}
+
+.exp-item,.edu-item,.it{position:relative}
+.exp-item{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.exp-item:last-of-type{border:0}
+.exp-yr{font-size:11.5px;font-weight:600;color:var(--ink-3);white-space:nowrap;padding-top:3px;min-width:96px}
+.exp-role{font-weight:700;font-size:15px}
+.exp-co{font-size:13px;font-weight:600;color:var(--ocean);margin-bottom:3px}
+.exp-desc{font-size:13.3px;color:var(--ink-2)}
+.edu-item{padding:10px 0;border-bottom:1px solid var(--line)}
+.edu-item:last-of-type{border:0}
+.edu-school{font-weight:700;font-size:15px}
+.edu-meta{font-size:13px;color:var(--ink-2);margin-bottom:2px}
+.edu-gpa{font-size:12.5px;color:var(--ocean);font-weight:600}
+#certList{list-style:none;margin-top:4px;display:flex;flex-direction:column;gap:7px}
+#certList li{font-size:13px;color:var(--ink-2);padding-left:16px;position:relative}
+#certList li::before{content:"▹";position:absolute;left:0;color:var(--indigo)}
+.c-extra .it,.c-custom .it{padding:10px 0;border-bottom:1px solid var(--line)}
+.c-extra .it:last-of-type,.c-custom .it:last-of-type{border:0}
+.c-extra .it .t,.c-custom .it .t{font-weight:700;font-size:14px;margin-bottom:2px}
+.c-extra .it .d,.c-custom .it .d{font-size:12.8px;color:var(--ink-2)}
+
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:4px}
+.proj{background:var(--card-2);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.25s;position:relative}
+.proj:hover{transform:translateY(-4px);border-color:var(--indigo)}
+.proj .cap{height:112px;background:linear-gradient(135deg,color-mix(in srgb,var(--indigo) 14%,var(--card-2)),var(--card-2));display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:11.6px;font-weight:500;border-bottom:1px solid var(--line);text-align:center;padding:10px;background-size:cover;background-position:center}
+.proj .cap.editable{cursor:pointer}
+.proj .body{padding:14px 15px}
+.proj h4{font-weight:700;font-size:15px;margin-bottom:5px}
+.proj p{font-size:12.6px;color:var(--ink-2);line-height:1.5}
+.proj .tag{font-size:10.6px;font-weight:600;color:var(--indigo);margin-top:9px;letter-spacing:.02em}
+
+.addbtn{display:none;font-size:12.5px;font-weight:600;margin-top:14px;padding:8px 14px;background:transparent;border:1px dashed var(--indigo);color:var(--indigo);border-radius:10px;cursor:pointer}
+body.editing .addbtn{display:inline-flex}
+.del{display:none;position:absolute;top:6px;right:6px;width:20px;height:20px;border-radius:50%;background:#ff5a6a;color:#fff;font-size:13px;line-height:20px;text-align:center;cursor:pointer;z-index:3;font-weight:700}
+.chip .del,.sk .del,.sedit .del{top:-7px;right:-7px;width:17px;height:17px;line-height:17px;font-size:11px}
+#certList .del{position:static;display:none;margin-left:8px}
+body.editing .del{display:inline-block}
+body.editing #certList .del{display:inline-block}
+
+.cta-flex{display:flex;align-items:flex-start;justify-content:space-between;gap:22px;flex-wrap:wrap}
+.c-cta .ctaL h3{font-weight:800;font-size:25px;letter-spacing:-.02em;margin-bottom:4px}
+.c-cta .ctaL p{font-size:13.5px;color:var(--ink-2);margin-bottom:8px}
+.cmeta{font-size:12.8px;color:var(--ink-3);display:flex;gap:14px;flex-wrap:wrap}
+.cedit{font-size:12px;color:var(--ink-3);margin-top:7px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.cedit b{color:var(--ink-2);font-weight:600}
+.cedit span[contenteditable]{color:var(--ocean);word-break:break-all}
+.btns{display:flex;gap:9px;flex-wrap:wrap}
+.btn{padding:11px 16px;border-radius:11px;font-size:13.5px;font-weight:600;text-align:center;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.btn.p{background:var(--indigo-solid);color:var(--on-accent)}
+.btn.s{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn:hover{transform:translateY(-2px)}
+.btn.s:hover{border-color:var(--ocean)}
+.btn.wa:hover{border-color:#25d366;color:#25d366}.btn.li:hover{border-color:#0a66c2;color:#0a66c2}
+
+footer{text-align:center;color:var(--ink-3);font-size:11.5px;margin-top:30px}
+
+.editbar{display:none;background:color-mix(in srgb,var(--indigo) 14%,var(--card));border:1px solid var(--indigo);border-radius:14px;padding:13px 16px;margin-bottom:16px;font-size:13px;color:var(--ink);align-items:center;gap:10px;flex-wrap:wrap}
+body.editing .editbar{display:flex}
+.editbar b{color:var(--indigo)}
+.editbar .grow{flex:1;min-width:20px}
+.editbar .iconbtn{width:auto;padding:0 12px;font-size:13px;font-weight:600;gap:6px}
+.modal{display:none;position:fixed;inset:0;background:rgba(5,8,18,.7);z-index:50;align-items:center;justify-content:center;padding:24px}
+.modal.show{display:flex}
+.modal .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;max-width:640px;width:100%;max-height:80vh;display:flex;flex-direction:column}
+.modal h3{font-weight:800;font-size:19px;margin-bottom:6px}
+.modal p{font-size:13px;color:var(--ink-2);margin-bottom:12px}
+.modal textarea{flex:1;min-height:300px;background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:14px;color:var(--ink);font-family:ui-monospace,monospace;font-size:12px;resize:none;outline:none}
+.modal .pin-in{background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:14px;color:var(--ink);font-family:inherit;font-size:22px;letter-spacing:.4em;text-align:center;outline:none}
+.modal .pin-in:focus{border-color:var(--indigo)}
+.modal .mrow{display:flex;gap:9px;margin-top:14px;justify-content:flex-end}
+
+@media(max-width:880px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .c-ai,.c-hero,.c-photo,.c-exp,.c-edu,.c-skills,.c-extra,.c-proj,.c-custom,.c-cta{grid-column:span 2}
+  .c-metric{grid-column:span 1}
+  .proj-grid{grid-template-columns:1fr}
+  .status{display:none}
+  .ai-orb{display:none}
+}
+</style>
+</head>
+<body data-theme="dark">
+<div class="wrap">
+
+  <div class="top">
+    <div class="brand"><span class="dot"></span> <span id="brand" data-k="brand"></span></div>
+    <div class="controls">
+      <div class="status"><span style="color:var(--ocean)">●</span> <span id="status" data-k="status"></span></div>
+      <button class="iconbtn" id="editBtn" title="Edit content" aria-label="Edit content"></button>
+      <button class="iconbtn" id="themeBtn" title="Toggle theme" style="font-size:16px">🌙</button>
+    </div>
+  </div>
+
+  <div class="editbar" id="editbar">
+    <span><b>Edit mode on.</b> Click highlighted text to edit; click the photo or a project cover to upload; use “+ Add” in each section.</span>
+    <span class="grow"></span>
+    <button class="iconbtn" data-add="custom">＋ Add section</button>
+    <button class="iconbtn" id="resumeBtn">📄 Upload resume PDF</button>
+    <button class="iconbtn" id="exportBtn">⬇ Export profile.json</button>
+  </div>
+
+  <div class="grid">
+
+    <!-- AI HERO (centerpiece) -->
+    <div class="cell c-ai">
+      <div class="ai-main">
+        <div class="ai-left">
+          <div class="ai-badge"><span class="b"></span> AI ASSISTANT · LIVE</div>
+          <h2 id="ai_h" data-k="ai_h" data-html="1"></h2>
+          <p class="ai-tag" id="ai_tag" data-k="ai_tag"></p>
+          <div class="ai-input">
+            <input id="chatinput" autocomplete="off">
+            <button id="chatsend">Ask →</button>
+          </div>
+          <div class="suggest" id="suggest"></div>
+          <div class="chatbox" id="chatbox"></div>
+        </div>
+        <div class="ai-orb"><span class="ring"></span><span class="ring"></span><span class="ring"></span><span class="core">✦</span></div>
+      </div>
+    </div>
+
+    <div class="cell c-hero">
+      <div class="label">About</div>
+      <h1 id="hero_h1" data-k="hero_h1" data-html="1"></h1>
+      <div class="role" id="role" data-k="role"></div>
+      <p class="bio" id="bio" data-k="bio"></p>
+      <div class="chips" id="chips"></div>
+      <button class="addbtn" data-add="chips">+ Add tag</button>
+    </div>
+
+    <div class="cell c-photo">
+      <div class="photo-ph" id="photoPh"></div>
+      <div class="photo-name" id="photoName"></div>
+      <div class="photo-loc" id="photoLoc"></div>
+    </div>
+
+    <div id="metricWrap" style="display:contents"></div>
+
+    <div class="cell c-exp">
+      <div class="label">Experience</div>
+      <div id="expList"></div>
+      <button class="addbtn" data-add="exp">+ Add experience</button>
+    </div>
+
+    <div class="cell c-edu">
+      <div class="label">Education</div>
+      <div id="eduBlock"></div>
+      <button class="addbtn" data-add="edu">+ Add education</button>
+      <div class="label" style="margin-top:20px">Certifications</div>
+      <ul id="certList"></ul>
+      <button class="addbtn" data-add="cert">+ Add certification</button>
+    </div>
+
+    <div class="cell c-skills">
+      <div class="label">Skills & Tools</div>
+      <div class="skillrow" id="skillRow"></div>
+      <button class="addbtn" data-add="skills">+ Add skill</button>
+    </div>
+
+    <div class="cell c-extra">
+      <div class="label">AI & Tooling</div>
+      <div id="beyondList"></div>
+      <button class="addbtn" data-add="beyond">+ Add item</button>
+    </div>
+
+    <div class="cell c-proj">
+      <div class="label">Selected Projects · capture</div>
+      <div class="proj-grid" id="projGrid"></div>
+      <button class="addbtn" data-add="proj">+ Add project</button>
+    </div>
+
+    <div id="customWrap" style="display:contents"></div>
+
+    <div class="cell c-cta">
+      <div class="cta-flex">
+        <div class="ctaL">
+          <h3 id="cta_h" data-k="cta_h"></h3>
+          <p id="cta_p" data-k="cta_p"></p>
+          <div class="cmeta"><span id="cmName"></span><span id="cmLoc"></span><span id="cmEmail"></span></div>
+          <div id="contactEdit"></div>
+        </div>
+        <div class="btns">
+          <a class="btn p" id="ctaCV"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/></svg> Download CV</a>
+          <a class="btn s" id="ctaEmail"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6 9 6 9-6"/></svg> Email</a>
+          <a class="btn s li" id="ctaLi" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21H9z"/></svg> LinkedIn</a>
+          <a class="btn s wa" id="ctaWa" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-2.9.8.8-2.8-.2-.3a8.2 8.2 0 1 1 7.2 4z"/><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2 3.2 5 4.5 1.8.7 2.5.8 3.4.7.6-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.5-.3z"/></svg> WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <footer>© 2026 Teguh Saputra Monoarfa · built &amp; deployed with AI</footer>
+</div>
+
+<div class="modal" id="pinModal">
+  <div class="box" style="max-width:340px">
+    <h3>Enter PIN</h3>
+    <p>This area is protected. Enter your PIN to edit content.</p>
+    <input class="pin-in" id="pinInput" type="password" inputmode="numeric" maxlength="8" placeholder="••••">
+    <div id="pinErr" style="color:#ff6b6b;font-size:12.5px;display:none;margin-top:10px">Wrong PIN — try again.</div>
+    <div class="mrow"><button class="btn s" id="pinCancel">Cancel</button><button class="btn p" id="pinOk">Unlock</button></div>
+  </div>
+</div>
+<div class="modal" id="modal">
+  <div class="box">
+    <h3>Your profile.json</h3>
+    <p>Copy this and replace <b>data/profile.json</b> in your GitHub repo. Push → Vercel redeploys with your edits. (Tip: large images bloat the JSON — for big screenshots drop files in <b>/public</b> and reference the path.)</p>
+    <textarea id="jsonOut" readonly></textarea>
+    <div class="mrow"><button class="btn s" id="copyJson">Copy</button><button class="btn s" id="closeModal">Close</button></div>
+  </div>
+</div>
+
+<script>
+const PIN_CODE = "9999";   // your private PIN — change in production
+
+const P = {
+  name:"Teguh Saputra Monoarfa", nick:"Tpy", location:"Jakarta, Indonesia",
+  email:"teguhsaputra412@gmail.com",
+  linkedin:"https://www.linkedin.com/in/teguhsaputra412/",
+  whatsapp:"https://api.whatsapp.com/send/?phone=6282291648646&text&type=phone_number&app_absent=0",
+  resumeUrl:"/CV_Teguh_Saputra_Monoarfa.pdf", resumeData:null, resumeName:null, photo:null
+};
+
+const D = {
+  brand:"Teguh Web Portfolio",
+  status:"Open to opportunities · Growth · BizOps · AI Ops",
+  ai_h:"Ask my AI anything <span class=\"grad\">about my experience.</span>",
+  ai_tag:"This portfolio has a built-in AI assistant trained on my resume. Get straight answers about my work, impact, and skills — before we even talk.",
+  ai_hello:"Hi! I'm Teguh's AI assistant, and I know his resume inside out. Ask me about his experience, impact, projects, or how he works with AI. 👋",
+  suggest:[],
+  ai_ph:"Type your question…  e.g. What are his biggest achievements?",
+  hero_h1:"Growth &amp; <em>Business Operations</em> generalist who builds with AI.",
+  role:"Product Consultant & Implementation · KantorKu HRIS (Dealls)",
+  bio:"Built a Customer Experience function from the ground up at a B2B SaaS, led CS teams across regional e-commerce (Lazada PH, Temu EU), and run operations across tooling, data, and AI. I think in CSAT, churn, retention, and adoption — then build the dashboards and AI agents that move them, learning and shipping with AI every day.",
+  chips:["CX Strategy","Analytics","AI Agents","Prompt Engineering","Implementation"],
+  metrics:[
+    {display:"97.9%",cap:"CSAT achieved (KantorKu)"},
+    {display:"300+",cap:"companies onboarded to HRIS"},
+    {display:"6,000+",cap:"headcount under management"},
+    {display:"82%",cap:"fewer Tier-2 escalations (Temu)"}
+  ],
+  exp:[
+   {yr:"Nov 2024 — now",role:"Product Consultant & Implementation Specialist",co:"Dealls · KantorKu HRIS (B2B SaaS)",d:"Rebuilt the CX function end-to-end; ran the CSAT dashboard & weekly reporting (97.9% CSAT, 82.4% ISS); led HRIS implementation across 300+ companies / 6,000+ headcount with <15-day time-to-value & 100% retention; owned prompt engineering & deployment of the KIRA AI agent."},
+   {yr:"Jun — Nov 2024",role:"Customer Service Team Leader",co:"Transcosmos · Lazada (PH Market)",d:"Led 15 agents to 71.85% CSAT; daily coaching & calibration. Fast-tracked from SME to Team Leader in 2 months."},
+   {yr:"Jan — Jun 2024",role:"Customer Resolution Senior Specialist (Tier 2)",co:"Teleperformance · Temu (EU Market)",d:"Handled complex Tier 2 escalations; authored documentation that cut Tier 2 escalation volume by 82%. Promoted Tier 1 → Tier 2 in 1 month."}
+  ],
+  edu:[{school:"Universitas Negeri Gorontalo (UNG)",meta:"Bachelor of Communication · 2016 – 2023",gpa:"GPA 3.65 / 4.00"}],
+  cert:["BISINDO Level 2 — Indonesian Sign Language (2026)","Alibaba Cloud Academy — Big Data Certified (2024)","DBS Foundation Coding Camp — ML Developer (2024)","Indosat IOH ID.CAMP — Data Scientist Program (2023)","Lintasarta Cloudeka Digischool — ML Program (2023)"],
+  skills:["Prompt Engineering","AI Agents","Python","SQL","Tableau","Excel / Sheets","Google Apps Script","Vercel","Netlify","CX Strategy","Churn & Retention","KPI & Reporting","Vendor Evaluation","JIRA","Confluence","Coda"],
+  beyond:[
+   {t:"🤖 Learning & Building with AI",d:"Daily AI use, prompt engineering & agent building as a long-term focus."},
+   {t:"⚙️ Vibe Coding",d:"Ships dashboards & internal tools with AI — no formal dev background."},
+   {t:"🧰 AI Platforms",d:"Claude, ChatGPT, Gemini, Deepseek, Ollama, Groq."}
+  ],
+  proj:[
+   {name:"KIRA — CX AI Agent",cap:"📸 KIRA agent screenshot",desc:"Prompt engineering & integration of an internal AI agent, now a daily tool across teams.",tag:"AI · Prompt Engineering",img:null},
+   {name:"Knowledge Base Dashboard",cap:"📸 KB dashboard screenshot",desc:"FAQs, KB articles & video tutorials in one product knowledge hub.",tag:"Vercel · Knowledge Mgmt",img:null},
+   {name:"CX Analytics Dashboard",cap:"📸 CSAT/ISS dashboard",desc:"CSAT & ISS analytics: KPI cards, trends, leaderboard, Voice of Customer.",tag:"Data Viz · Reporting",img:null},
+   {name:"Client Analytics Dashboard",cap:"📸 client dashboard",desc:"Client database with churn, renewal & retention tracking.",tag:"Analytics · Retention",img:null},
+   {name:"User Onboarding Program",cap:"📸 onboarding flow",desc:"End-to-end onboarding & training, translating business needs into product solutions.",tag:"Implementation · Enablement",img:null}
+  ],
+  custom:[],
+  cta_h:"Let's talk.",
+  cta_p:"Open to Growth, BizOps & AI-focused roles."
+};
+
+let editMode=false, metricsAnimated=false;
+const $=id=>document.getElementById(id);
+const EDITABLE=new Set(['brand','status','hero_h1','role','bio','ai_h','ai_tag','cta_h','cta_p']);
+const HTMLK=new Set(['hero_h1','ai_h']);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const ICON_LOCK='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="11" width="15" height="9.5" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+const ICON_UNLOCK='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="11" width="15" height="9.5" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-1.3"/></svg>';
+
+function ed(arr,idx,field){ return editMode?`contenteditable="true" data-arr="${arr}" data-idx="${idx}" data-field="${field||''}"`:''; }
+function ep(field){ return editMode?`contenteditable="true" data-p="${field}"`:''; }
+function del(arr,i){ return `<span class="del" data-del="${arr}" data-i="${i}" title="Delete">×</span>`; }
+function parseMetric(s){ const m=String(s).match(/^([\d.,]+)(.*)$/); if(!m) return {n:null,suf:'',dec:0}; const ns=m[1].replace(/,/g,''); return {n:parseFloat(ns),suf:m[2],dec:(ns.split('.')[1]||'').length}; }
+
+function render(){
+  document.body.classList.toggle('editing',editMode);
+  document.title=D.brand;
+  document.querySelectorAll('[data-k]').forEach(el=>{
+    const k=el.dataset.k;
+    if(HTMLK.has(k)||el.dataset.html) el.innerHTML=D[k]; else el.textContent=D[k];
+    el.contentEditable = (editMode && EDITABLE.has(k));
+  });
+  // brand: accent only the last word in view mode
+  const bEl=$('brand');
+  if(editMode){ bEl.textContent=D.brand; }
+  else { const w=D.brand.trim().split(/\s+/); const last=w.pop()||''; bEl.innerHTML=(w.length?esc(w.join(' '))+' ':'')+'<span class="grad">'+esc(last)+'</span>'; }
+  $('chatinput').placeholder=D.ai_ph;
+  // photo / identity
+  $('photoName').textContent=P.name; $('photoLoc').textContent="📍 "+P.location;
+  const ph=$('photoPh');
+  if(P.photo){ph.style.backgroundImage=`url(${P.photo})`;ph.textContent="";}
+  else {ph.style.backgroundImage="";ph.textContent= editMode?"[ click to upload photo ]":"[ profile photo ]";}
+  ph.classList.toggle('editable',editMode);
+  // contact
+  $('cmName').innerHTML=`👤 <span ${ep('name')}>${esc(P.name)}</span>`;
+  $('cmLoc').innerHTML=`📍 <span ${ep('location')}>${esc(P.location)}</span>`;
+  $('cmEmail').innerHTML=`✉ <span ${ep('email')}>${esc(P.email)}</span>`;
+  $('contactEdit').innerHTML = editMode? `
+    <div class="cedit"><b>LinkedIn:</b> <span ${ep('linkedin')}>${esc(P.linkedin)}</span></div>
+    <div class="cedit"><b>WhatsApp:</b> <span ${ep('whatsapp')}>${esc(P.whatsapp)}</span></div>
+    <div class="cedit"><b>Resume path (/public):</b> <span ${ep('resumeUrl')}>${esc(P.resumeUrl)}</span></div>` : '';
+  $('ctaEmail').href="mailto:"+P.email; $('ctaLi').href=P.linkedin; $('ctaWa').href=P.whatsapp;
+  const cv=$('ctaCV');
+  if(P.resumeData){ cv.href=P.resumeData; cv.setAttribute('download',P.resumeName||'CV_Teguh.pdf'); }
+  else { cv.href=P.resumeUrl; cv.setAttribute('download',''); }
+  cv.onclick=null;
+  // chips
+  $('chips').innerHTML=D.chips.map((c,i)=>`<span class="chip" ${ed('chips',i)}>${esc(c)}${del('chips',i)}</span>`).join('');
+  // metrics
+  renderMetrics();
+  // experience
+  $('expList').innerHTML=D.exp.map((e,i)=>`<div class="exp-item">${del('exp',i)}<div class="exp-yr" ${ed('exp',i,'yr')}>${esc(e.yr)}</div><div style="flex:1"><div class="exp-role" ${ed('exp',i,'role')}>${esc(e.role)}</div><div class="exp-co" ${ed('exp',i,'co')}>${esc(e.co)}</div><div class="exp-desc" ${ed('exp',i,'d')}>${esc(e.d)}</div></div></div>`).join('');
+  // education
+  $('eduBlock').innerHTML=D.edu.map((e,i)=>`<div class="edu-item">${del('edu',i)}<div class="edu-school" ${ed('edu',i,'school')}>${esc(e.school)}</div><div class="edu-meta" ${ed('edu',i,'meta')}>${esc(e.meta)}</div><div class="edu-gpa" ${ed('edu',i,'gpa')}>${esc(e.gpa)}</div></div>`).join('');
+  $('certList').innerHTML=D.cert.map((c,i)=>`<li><span ${ed('cert',i)}>${esc(c)}</span>${del('cert',i)}</li>`).join('');
+  // skills
+  $('skillRow').innerHTML=D.skills.map((s,i)=>`<span class="sk" ${ed('skills',i)}>${esc(s)}${del('skills',i)}</span>`).join('');
+  // beyond
+  $('beyondList').innerHTML=D.beyond.map((b,i)=>`<div class="it">${del('beyond',i)}<div class="t" ${ed('beyond',i,'t')}>${esc(b.t)}</div><div class="d" ${ed('beyond',i,'d')}>${esc(b.d)}</div></div>`).join('');
+  // projects
+  $('projGrid').innerHTML=D.proj.map((p,i)=>{const cover=p.img?`style="background-image:url(${p.img})"`:'';return `<div class="proj">${del('proj',i)}<div class="cap ${editMode?'editable':''}" data-proj-img="${i}" ${cover}>${p.img?'':esc(p.cap)}</div><div class="body"><h4 ${ed('proj',i,'name')}>${esc(p.name)}</h4><p ${ed('proj',i,'desc')}>${esc(p.desc)}</p><div class="tag" ${ed('proj',i,'tag')}>${esc(p.tag)}</div></div></div>`;}).join('');
+  document.querySelectorAll('[data-proj-img]').forEach(el=>{ el.onclick = editMode? ()=>pickProjImg(+el.dataset.projImg) : null; });
+  // custom sections
+  renderCustom();
+  // suggestions
+  renderSuggest();
+}
+
+function renderSuggest(){
+  const sug=$('suggest');
+  if(editMode){
+    sug.innerHTML = D.suggest.map((s,i)=>`<span class="sedit" contenteditable="true" data-arr="suggest" data-idx="${i}" data-field="">${esc(s)}${del('suggest',i)}</span>`).join('') + `<button class="addbtn" data-add="suggest" style="margin:0">+ Add suggestion</button>`;
+  } else {
+    sug.innerHTML = D.suggest.map(s=>`<button>${esc(s)}</button>`).join('');
+    sug.querySelectorAll('button').forEach(b=>b.onclick=()=>send(b.textContent));
+  }
+}
+function renderCustom(){
+  $('customWrap').innerHTML = D.custom.map((sec,i)=>{
+    const items = sec.items.map((it,j)=>`<div class="it"><span class="del" data-delc="${i}" data-iidx="${j}" title="Delete">×</span><div class="t" ${editMode?`contenteditable="true" data-citem="${i}" data-iidx="${j}" data-field="t"`:''}>${esc(it.t)}</div><div class="d" ${editMode?`contenteditable="true" data-citem="${i}" data-iidx="${j}" data-field="d"`:''}>${esc(it.d)}</div></div>`).join('');
+    return `<div class="cell c-custom">${del('custom',i)}<div class="label" ${editMode?`contenteditable="true" data-ctitle="${i}"`:''}>${esc(sec.title)}</div>${items}<button class="addbtn" data-addc="${i}">+ Add item</button></div>`;
+  }).join('');
+}
+function renderMetrics(){
+  const wrap=$('metricWrap');
+  wrap.innerHTML = D.metrics.map((m,i)=>{
+    if(editMode) return `<div class="cell c-metric">${del('metrics',i)}<div class="num" contenteditable="true" data-arr="metrics" data-idx="${i}" data-field="display">${esc(m.display)}</div><div class="cap" contenteditable="true" data-arr="metrics" data-idx="${i}" data-field="cap">${esc(m.cap)}</div></div>`;
+    const p=parseMetric(m.display);
+    const inner = p.n!=null ? `<span class="v">${metricsAnimated?fmt(p.n,p.dec):'0'}</span><span class="suf">${esc(p.suf)}</span>` : `<span class="v">${esc(m.display)}</span>`;
+    return `<div class="cell c-metric"><div class="num num-feat" data-n="${p.n}" data-dec="${p.dec}">${inner}</div><div class="cap">${esc(m.cap)}</div></div>`;
+  }).join('') + (editMode?`<div class="cell c-metric addcard" data-add="metrics">＋</div>`:'');
+  if(!editMode && !metricsAnimated){ animateMetrics(); metricsAnimated=true; }
+}
+function fmt(n,dec){const f=dec?(+n).toFixed(dec):Math.round(n).toString();const p=f.split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');return p.join('.');}
+function animateMetrics(){
+  $('metricWrap').querySelectorAll('.num[data-n]').forEach(numEl=>{
+    const n=parseFloat(numEl.dataset.n); if(isNaN(n))return; const dec=+numEl.dataset.dec||0; const v=numEl.querySelector('.v'); const t0=performance.now();
+    (function s(t){const pr=Math.min((t-t0)/1100,1);v.textContent=fmt(pr*pr*(3-2*pr)*n,dec);if(pr<1)requestAnimationFrame(s);})(t0);
+  });
+}
+
+/* write-back */
+document.addEventListener('input',e=>{
+  const t=e.target; if(!t.isContentEditable) return; const ds=t.dataset;
+  if(ds.k!==undefined){ D[ds.k]= (HTMLK.has(ds.k)||ds.html)? t.innerHTML : t.textContent; }
+  else if(ds.arr!==undefined){ if(ds.field) D[ds.arr][+ds.idx][ds.field]=t.textContent; else D[ds.arr][+ds.idx]=t.textContent; }
+  else if(ds.ctitle!==undefined){ D.custom[+ds.ctitle].title=t.textContent; }
+  else if(ds.citem!==undefined){ D.custom[+ds.citem].items[+ds.iidx][ds.field]=t.textContent; }
+  else if(ds.p!==undefined){ P[ds.p]=t.textContent; if(ds.p==='email')$('ctaEmail').href="mailto:"+P.email; if(ds.p==='linkedin')$('ctaLi').href=P.linkedin; if(ds.p==='whatsapp')$('ctaWa').href=P.whatsapp; }
+});
+
+/* add / delete (delegated) */
+const NEW={
+  chips:()=>"New tag", suggest:()=>"New question?",
+  metrics:()=>({display:"100%",cap:"New metric"}),
+  exp:()=>({yr:"Year",role:"New role",co:"Company",d:"What you did and the impact."}),
+  edu:()=>({school:"School / University",meta:"Degree · Years",gpa:"GPA / score"}),
+  cert:()=>"New certification (Year)", skills:()=>"New skill",
+  beyond:()=>({t:"🔧 New item",d:"Short description."}),
+  proj:()=>({name:"New Project",cap:"📸 add a screenshot",desc:"Describe what you built and the impact.",tag:"Category · Tag",img:null}),
+  custom:()=>({title:"New Section",items:[{t:"Item title",d:"Description."}]})
+};
+document.addEventListener('click',e=>{
+  const add=e.target.closest('[data-add]'); if(add){ D[add.dataset.add].push(NEW[add.dataset.add]()); render(); return; }
+  const addc=e.target.closest('[data-addc]'); if(addc){ D.custom[+addc.dataset.addc].items.push({t:"New item",d:"Description."}); render(); return; }
+  const delc=e.target.closest('[data-delc]'); if(delc){ D.custom[+delc.dataset.delc].items.splice(+delc.dataset.iidx,1); render(); return; }
+  const d=e.target.closest('[data-del]'); if(d){ D[d.dataset.del].splice(+d.dataset.i,1); render(); }
+});
+
+/* images + resume */
+$('photoPh').addEventListener('click',()=>{ if(editMode) pickImg(d=>{P.photo=d;render();}); });
+function pickImg(cb){ const i=document.createElement('input'); i.type='file'; i.accept='image/*'; i.onchange=ev=>{const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>cb(r.result);r.readAsDataURL(f);}; i.click(); }
+function pickProjImg(i){ pickImg(d=>{D.proj[i].img=d;render();}); }
+$('resumeBtn').onclick=()=>{ const i=document.createElement('input'); i.type='file'; i.accept='application/pdf'; i.onchange=ev=>{const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{P.resumeData=r.result;P.resumeName=f.name;render();alert('Resume ready. Click "Download CV" to test.');};r.readAsDataURL(f);}; i.click(); };
+
+/* theme */
+$('themeBtn').onclick=()=>{const n=document.body.dataset.theme==='dark'?'light':'dark';document.body.dataset.theme=n;$('themeBtn').textContent=n==='dark'?'🌙':'☀️';};
+
+/* PIN edit */
+$('editBtn').innerHTML=ICON_LOCK;
+$('editBtn').onclick=()=>{
+  if(editMode){ editMode=false; $('editBtn').classList.remove('active'); $('editBtn').innerHTML=ICON_LOCK; render(); }
+  else { $('pinErr').style.display='none'; $('pinInput').value=''; $('pinModal').classList.add('show'); setTimeout(()=>$('pinInput').focus(),60); }
+};
+function tryPin(){ if($('pinInput').value===PIN_CODE){ $('pinModal').classList.remove('show'); editMode=true; $('editBtn').classList.add('active'); $('editBtn').innerHTML=ICON_UNLOCK; render(); } else { $('pinErr').style.display='block'; $('pinInput').value=''; $('pinInput').focus(); } }
+$('pinOk').onclick=tryPin; $('pinInput').addEventListener('keydown',e=>{if(e.key==='Enter')tryPin();}); $('pinCancel').onclick=()=>$('pinModal').classList.remove('show');
+
+/* export */
+$('exportBtn').onclick=()=>{ const out={profile:{name:P.name,nick:P.nick,location:P.location,email:P.email,linkedin:P.linkedin,whatsapp:P.whatsapp,resumeUrl:P.resumeUrl,photo:P.photo},content:D}; $('jsonOut').value=JSON.stringify(out,null,2); $('modal').classList.add('show'); };
+$('closeModal').onclick=()=>$('modal').classList.remove('show');
+$('copyJson').onclick=()=>{$('jsonOut').select();try{document.execCommand('copy');const b=$('copyJson');b.textContent='✓';setTimeout(()=>b.textContent='Copy',1200);}catch(e){}};
+
+/* AI chat */
+function buildContext(){
+  return `You are the AI assistant embedded on the portfolio website of Teguh Saputra Monoarfa (nickname Tpy). Your ONLY job is to answer questions about Teguh based on his resume below. Reply in English. Be warm, concise (2-5 sentences), specific, and use his real numbers. Speak about him in third person. Emphasize his technical and AI work when relevant. If a question is unrelated to Teguh's professional profile, politely say you can only answer questions about Teguh's background and suggest what they could ask.
+
+=== RESUME ===
+NAME: Teguh Saputra Monoarfa. Location: Jakarta, Indonesia. Email: teguhsaputra412@gmail.com. LinkedIn: linkedin.com/in/teguhsaputra412.
+TITLE: Growth & Business Operations generalist | Product Consultant & Implementation | Customer Experience.
+SUMMARY: Built a CX function from the ground up at a B2B SaaS, led CS teams across regional e-commerce (Lazada PH, Temu EU), runs operations across tooling, data and AI. Thinks in CSAT, churn, retention, feature adoption; builds reporting tools and dashboards; translates user needs into processes and product decisions. Detail-oriented, fast learner, deeply committed to learning and building with AI.
+EXPERIENCE:
+1) Dealls, Jakarta — Product Consultant & Implementation Specialist, KantorKu HRIS (B2B SaaS) — Nov 2024–Present. Rebuilt the CX function (team restructuring, knowledge base, quarterly targets). Designed & ran CSAT dashboard + weekly reporting: 97.9% CSAT and 82.4% ISS. Identified churn drivers (feature mismatch, failed adoption) and fed them to Product & Engineering. Managed HRIS implementation across 300+ companies / 6,000+ headcount; time-to-value <15 days; 100% retention (2026). Owned prompt engineering & deployment of internal AI agent KIRA (daily team tool). Analyzed chat history across personas (HR Admin, Employee, Prospect) with AI tools to produce structured FAQs, product insights, recommendations.
+2) Transcosmos Indonesia, Yogyakarta — Customer Service Team Leader, Lazada (PH) — Jun–Nov 2024. Led 15 agents; 71.85% CSAT; daily coaching; promoted SME → Team Leader in 2 months.
+3) Teleperformance Indonesia, Yogyakarta — Customer Resolution Senior Specialist (Tier 2), Temu (EU) — Jan–Jun 2024. Complex Tier 2 escalations; documentation reduced Tier 2 escalation volume by 82%; promoted Tier 1 → Tier 2 in 1 month.
+SKILLS: CX strategy, dashboards & reporting, knowledge management, vendor evaluation, onboarding & training, churn & retention analysis, KPI tracking; Python, SQL, Excel, Google Sheets, Tableau, EDA, visualization; JIRA, Confluence, Trello, Coda; AI/LLM & prompt engineering; Claude, ChatGPT, Gemini, Deepseek, Ollama, Groq; Vercel, Netlify, Google Apps Script; team management, coaching, cross-functional collaboration. Languages: Bahasa Indonesia (native), English (professional working), Indonesian Sign Language BISINDO Level 2.
+PROJECTS: User Onboarding & Training Program; Prompt Engineering & Integration of CX AI Agent KIRA; Product Knowledge Base Dashboard; CX Analytics Dashboard (CSAT & ISS); Client Analytics Dashboard (churn, renewal & retention).
+EDUCATION: Universitas Negeri Gorontalo (UNG), Bachelor of Communication, 2016–2023, GPA 3.65/4.00.
+CERTIFICATIONS: BISINDO Level 2 (2026); Alibaba Cloud Big Data Certified (2024); DBS Foundation Coding Camp ML Developer (2024); Indosat IOH ID.CAMP Data Scientist (2023); Lintasarta Cloudeka Digischool ML (2023).
+=== END RESUME ===`;
+}
+const box=$('chatbox'),input=$('chatinput'),sendBtn=$('chatsend'),history=[];
+function addMsg(text,who){const el=document.createElement('div');el.className='msg '+who;el.textContent=text;box.appendChild(el);box.scrollTop=box.scrollHeight;return el;}
+async function send(q){
+  if(!q.trim())return;
+  if(!box.classList.contains('show')){box.classList.add('show');addMsg(D.ai_hello,'bot');}
+  input.value='';sendBtn.disabled=true;
+  addMsg(q,'me');
+  const typing=document.createElement('div');typing.className='msg bot';typing.innerHTML='<div class="typing"><span></span><span></span><span></span></div>';box.appendChild(typing);box.scrollTop=box.scrollHeight;
+  history.push({role:'user',content:q});
+  try{
+    const res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:buildContext(),messages:history})});
+    const data=await res.json();
+    const txt=(data.text||"").trim()||(data.error?("⚠ "+data.error):"Sorry, something went wrong. Try again.");
+    typing.remove();addMsg(txt,'bot');history.push({role:'assistant',content:txt});
+  }catch(e){ typing.remove();addMsg("Couldn't reach the AI service. Locally, set GROQ_API_KEY in .env.local and run `vercel dev`. On Vercel, add it under Settings → Environment Variables.",'bot'); }
+  sendBtn.disabled=false;input.focus();
+}
+sendBtn.onclick=()=>send(input.value);
+input.addEventListener('keydown',e=>{if(e.key==='Enter')send(input.value)});
+
+(async function init(){
+  try{ const r=await fetch('/data/profile.json',{cache:'no-store'}); if(r.ok){ const j=await r.json(); if(j.profile) Object.assign(P,j.profile); if(j.content) Object.assign(D,j.content); } }catch(e){}
+  render();
+  setTimeout(()=>document.body.classList.add('loaded'),900);
+})();
+</script>
+</body>
+</html>
