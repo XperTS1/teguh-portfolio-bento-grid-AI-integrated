@@ -1,7 +1,19 @@
-// Vercel Serverless Function — proxies chat requests to Groq.
-// The API key is read from the GROQ_API_KEY environment variable.
-// NEVER hardcode the key here. Set it in Vercel → Settings → Environment Variables,
-// or in a local .env.local file (which must stay out of git).
+const DOC_ID = "1jOuzwezYQ1KTYdAsgUYu0ffU5Al1EzScqOtmO4dR094";
+const GDOC_URL = `https://docs.google.com/document/d/${DOC_ID}/export?format=txt`;
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+let cvCache = { text: null, ts: 0 };
+
+async function fetchCV() {
+  if (cvCache.text && Date.now() - cvCache.ts < CACHE_TTL) return cvCache.text;
+  try {
+    const r = await fetch(GDOC_URL);
+    if (r.ok) {
+      cvCache = { text: await r.text(), ts: Date.now() };
+    }
+  } catch {}
+  return cvCache.text;
+}
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -15,7 +27,6 @@ export default async function handler(req, res) {
     });
   }
 
-  // Parse body (Vercel usually auto-parses JSON; fall back to raw if needed).
   let body = req.body;
   if (!body || typeof body === "string") {
     try {
@@ -29,6 +40,11 @@ export default async function handler(req, res) {
   const messages = Array.isArray(body.messages) ? body.messages : [];
   const model = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
 
+  const cvText = await fetchCV();
+  const fullSystem = cvText
+    ? `=== RESUME (live from Google Docs) ===\n${cvText}\n=== END RESUME ===\n\n${system}`
+    : system;
+
   try {
     const upstream = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
@@ -40,7 +56,7 @@ export default async function handler(req, res) {
         model,
         temperature: 0.4,
         max_tokens: 800,
-        messages: [{ role: "system", content: system }, ...messages],
+        messages: [{ role: "system", content: fullSystem }, ...messages],
       }),
     });
 
@@ -51,8 +67,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const text =
-      (data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "";
+    const text = data?.choices?.[0]?.message?.content || "";
     return res.status(200).json({ text });
   } catch (e) {
     return res.status(500).json({ error: "Upstream error: " + (e && e.message ? e.message : String(e)) });

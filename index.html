@@ -253,7 +253,6 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      min-height: 230px;
       background: linear-gradient(160deg, var(--card-2), var(--card))
     }
 
@@ -307,6 +306,7 @@
       padding: 1.5px;
       background: linear-gradient(120deg, var(--indigo), var(--ocean), var(--indigo));
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       opacity: .6;
@@ -489,6 +489,20 @@
       border-bottom-left-radius: 4px
     }
 
+    .msg.bot ul {
+      margin: 6px 0 2px;
+      padding-left: 18px
+    }
+
+    .msg.bot li {
+      margin: 2px 0
+    }
+
+    .msg.bot strong {
+      color: var(--ink);
+      font-weight: 700
+    }
+
     .msg.me {
       background: var(--indigo-solid);
       color: var(--on-accent);
@@ -651,20 +665,51 @@
 
     .photo-ph {
       flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--ink-3);
-      font-size: 13px;
-      border-bottom: 1px dashed var(--line);
+      aspect-ratio: 1 / 1;
+      width: calc(100% + 48px);
       margin: -24px -24px 16px;
+      border-bottom: 1px dashed var(--line);
       border-radius: var(--radius) var(--radius) 0 0;
+      font-size: 13px;
       font-weight: 500;
-      background-size: cover;
-      background-position: center;
-      min-height: 150px;
-      text-align: center
+      color: var(--ink-3);
+      text-align: center;
+      overflow: hidden;
+      position: relative
     }
+
+    .photo-ph img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 20%;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none
+    }
+
+    .photo-ph img.grabbable { cursor: grab }
+    .photo-ph img.grabbing  { cursor: grabbing }
+
+    .drag-hint {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: rgba(255,255,255,.9);
+      background: rgba(0,0,0,.45);
+      padding: 3px 10px;
+      border-radius: 20px;
+      pointer-events: none;
+      white-space: nowrap
+    }
+
+    .cap.grabbable { cursor: grab }
+    .cap.grabbing  { cursor: grabbing }
+    .cap .drag-hint { bottom: 6px }
 
     .photo-ph.editable {
       cursor: pointer
@@ -678,7 +723,10 @@
 
     .photo-loc {
       font-size: 13px;
-      color: var(--ink-2)
+      color: var(--ink-2);
+      display: flex;
+      align-items: center;
+      gap: 5px
     }
 
     .c-metric .num {
@@ -1005,7 +1053,14 @@
       color: var(--ink-3);
       display: flex;
       gap: 14px;
-      flex-wrap: wrap
+      flex-wrap: wrap;
+      align-items: center
+    }
+
+    .cmeta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px
     }
 
     .cedit {
@@ -1194,6 +1249,16 @@
       justify-content: flex-end
     }
 
+    @media(max-width:1024px) {
+      .c-hero { grid-column: span 7 }
+      .c-photo { grid-column: span 5 }
+      .c-exp { grid-column: span 6 }
+      .c-edu { grid-column: span 6 }
+      .c-skills { grid-column: span 6 }
+      .c-extra { grid-column: span 6 }
+      .proj-grid { grid-template-columns: repeat(2, 1fr) }
+    }
+
     @media(max-width:880px) {
       .grid {
         grid-template-columns: repeat(2, 1fr)
@@ -1274,7 +1339,7 @@
       </div>
 
       <div class="cell c-hero">
-        <div class="label">About</div>
+        <div class="label" data-lk="about">About</div>
         <h1 id="hero_h1" data-k="hero_h1" data-html="1"></h1>
         <div class="role" id="role" data-k="role"></div>
         <p class="bio" id="bio" data-k="bio"></p>
@@ -1291,34 +1356,34 @@
       <div id="metricWrap" style="display:contents"></div>
 
       <div class="cell c-exp">
-        <div class="label">Experience</div>
+        <div class="label" data-lk="exp">Experience</div>
         <div id="expList"></div>
         <button class="addbtn" data-add="exp">+ Add experience</button>
       </div>
 
       <div class="cell c-edu">
-        <div class="label">Education</div>
+        <div class="label" data-lk="edu">Education</div>
         <div id="eduBlock"></div>
         <button class="addbtn" data-add="edu">+ Add education</button>
-        <div class="label" style="margin-top:20px">Certifications</div>
+        <div class="label" data-lk="cert" style="margin-top:20px">Certifications</div>
         <ul id="certList"></ul>
         <button class="addbtn" data-add="cert">+ Add certification</button>
       </div>
 
       <div class="cell c-skills">
-        <div class="label">Skills & Tools</div>
+        <div class="label" data-lk="skills">Skills & Tools</div>
         <div class="skillrow" id="skillRow"></div>
         <button class="addbtn" data-add="skills">+ Add skill</button>
       </div>
 
       <div class="cell c-extra">
-        <div class="label">AI & Tooling</div>
+        <div class="label" data-lk="extra">AI & Tooling</div>
         <div id="beyondList"></div>
         <button class="addbtn" data-add="beyond">+ Add item</button>
       </div>
 
       <div class="cell c-proj">
-        <div class="label">Projects</div>
+        <div class="label" data-lk="proj">Projects</div>
         <div class="proj-grid" id="projGrid"></div>
         <button class="addbtn" data-add="proj">+ Add project</button>
       </div>
@@ -1393,8 +1458,13 @@
       email: "teguhsaputra412@gmail.com",
       linkedin: "https://www.linkedin.com/in/teguhsaputra412/",
       whatsapp: "https://api.whatsapp.com/send/?phone=6282291648646&text&type=phone_number&app_absent=0",
-      resumeUrl: "/CV_Teguh_Saputra_Monoarfa.pdf", resumeData: null, resumeName: null, photo: null
+      resumeUrl: "https://docs.google.com/document/d/1jOuzwezYQ1KTYdAsgUYu0ffU5Al1EzScqOtmO4dR094/export?format=pdf", resumeData: null, resumeName: null, photo: null,
+      photoPos: "50% 20%"
     };
+
+    const IC_USER  = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>`;
+    const IC_PIN   = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>`;
+    const IC_EMAIL = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6 9 6 9-6"/></svg>`;
 
     const D = {
       brand: "Teguh Web Portfolio",
@@ -1436,7 +1506,8 @@
       ],
       custom: [],
       cta_h: "Let's talk.",
-      cta_p: "Open to Growth, BizOps & AI-focused roles."
+      cta_p: "Open to Growth, BizOps & AI-focused roles.",
+      labels: { about: "About", exp: "Experience", edu: "Education", cert: "Certifications", skills: "Skills & Tools", extra: "AI & Tooling", proj: "Projects" }
     };
 
     let editMode = false, metricsAnimated = false;
@@ -1460,29 +1531,52 @@
         if (HTMLK.has(k) || el.dataset.html) el.innerHTML = D[k]; else el.textContent = D[k];
         el.contentEditable = (editMode && EDITABLE.has(k));
       });
+      // section labels
+      document.querySelectorAll('[data-lk]').forEach(el => {
+        const k = el.dataset.lk;
+        if (D.labels && D.labels[k] !== undefined) el.textContent = D.labels[k];
+        el.contentEditable = editMode;
+      });
       // brand: accent only the last word in view mode
       const bEl = $('brand');
       if (editMode) { bEl.textContent = D.brand; }
       else { const w = D.brand.trim().split(/\s+/); const last = w.pop() || ''; bEl.innerHTML = (w.length ? esc(w.join(' ')) + ' ' : '') + '<span class="grad">' + esc(last) + '</span>'; }
       $('chatinput').placeholder = D.ai_ph;
       // photo / identity
-      $('photoName').textContent = P.name; $('photoLoc').textContent = "📍 " + P.location;
+      const nameAttr = editMode ? `contenteditable="true" data-p="name"` : '';
+      const locAttr  = editMode ? `contenteditable="true" data-p="location"` : '';
+      $('photoName').innerHTML = `<span ${nameAttr}>${esc(P.name)}</span>`;
+      $('photoLoc').innerHTML  = `${IC_PIN} <span ${locAttr}>${esc(P.location)}</span>`;
       const ph = $('photoPh');
-      if (P.photo) { ph.style.backgroundImage = `url(${P.photo})`; ph.textContent = ""; }
-      else { ph.style.backgroundImage = ""; ph.textContent = editMode ? "[ click to upload photo ]" : "[ profile photo ]"; }
+      if (P.photo) {
+        const pos = P.photoPos || '50% 20%';
+        ph.innerHTML = `<img src="${P.photo}" alt="${esc(P.name)}" style="object-position:${pos}">${editMode ? '<span class="drag-hint">↕ drag to reposition</span>' : ''}`;
+        if (editMode) {
+          const img = ph.querySelector('img');
+          img.classList.add('grabbable');
+          img.addEventListener('mousedown', e => {
+            e.preventDefault();
+            const m = img.style.objectPosition.match(/([\d.]+)%\s*([\d.]+)%/);
+            _drag = { el: img, bg: false, sx: e.clientX, sy: e.clientY, px: m ? +m[1] : 50, py: m ? +m[2] : 20, moved: false };
+          });
+        }
+      } else {
+        ph.innerHTML = '';
+        ph.textContent = editMode ? '[ click to upload photo ]' : '[ profile photo ]';
+      }
       ph.classList.toggle('editable', editMode);
       // contact
-      $('cmName').innerHTML = `👤 <span ${ep('name')}>${esc(P.name)}</span>`;
-      $('cmLoc').innerHTML = `📍 <span ${ep('location')}>${esc(P.location)}</span>`;
-      $('cmEmail').innerHTML = `✉ <span ${ep('email')}>${esc(P.email)}</span>`;
+      $('cmName').innerHTML  = `${IC_USER}  <span ${ep('name')}>${esc(P.name)}</span>`;
+      $('cmLoc').innerHTML   = `${IC_PIN}   <span ${ep('location')}>${esc(P.location)}</span>`;
+      $('cmEmail').innerHTML = `${IC_EMAIL} <span ${ep('email')}>${esc(P.email)}</span>`;
       $('contactEdit').innerHTML = editMode ? `
     <div class="cedit"><b>LinkedIn:</b> <span ${ep('linkedin')}>${esc(P.linkedin)}</span></div>
     <div class="cedit"><b>WhatsApp:</b> <span ${ep('whatsapp')}>${esc(P.whatsapp)}</span></div>
     <div class="cedit"><b>Resume path (/public):</b> <span ${ep('resumeUrl')}>${esc(P.resumeUrl)}</span></div>` : '';
       $('ctaEmail').href = "mailto:" + P.email; $('ctaLi').href = P.linkedin; $('ctaWa').href = P.whatsapp;
       const cv = $('ctaCV');
-      if (P.resumeData) { cv.href = P.resumeData; cv.setAttribute('download', P.resumeName || 'CV_Teguh.pdf'); }
-      else { cv.href = P.resumeUrl; cv.setAttribute('download', ''); }
+      if (P.resumeData) { cv.href = P.resumeData; cv.setAttribute('download', P.resumeName || 'CV_Teguh_Saputra_Monoarfa.pdf'); }
+      else { cv.href = P.resumeUrl; cv.setAttribute('download', 'CV_Teguh_Saputra_Monoarfa.pdf'); }
       cv.onclick = null;
       // chips
       $('chips').innerHTML = D.chips.map((c, i) => `<span class="chip" ${ed('chips', i)}>${esc(c)}${del('chips', i)}</span>`).join('');
@@ -1498,8 +1592,22 @@
       // beyond
       $('beyondList').innerHTML = D.beyond.map((b, i) => `<div class="it">${del('beyond', i)}<div class="t" ${ed('beyond', i, 't')}>${esc(b.t)}</div><div class="d" ${ed('beyond', i, 'd')}>${esc(b.d)}</div></div>`).join('');
       // projects
-      $('projGrid').innerHTML = D.proj.map((p, i) => { const cover = p.img ? `style="background-image:url(${p.img})"` : ''; return `<div class="proj">${del('proj', i)}<div class="cap ${editMode ? 'editable' : ''}" data-proj-img="${i}" ${cover}>${p.img ? '' : esc(p.cap)}</div><div class="body"><h4 ${ed('proj', i, 'name')}>${esc(p.name)}</h4><p ${ed('proj', i, 'desc')}>${esc(p.desc)}</p><div class="tag" ${ed('proj', i, 'tag')}>${esc(p.tag)}</div></div></div>`; }).join('');
-      document.querySelectorAll('[data-proj-img]').forEach(el => { el.onclick = editMode ? () => pickProjImg(+el.dataset.projImg) : null; });
+      $('projGrid').innerHTML = D.proj.map((p, i) => {
+        const bgPos = p.imgPos || '50% 50%';
+        const cover = p.img ? `style="background-image:url(${p.img});background-position:${bgPos}"` : '';
+        const hint  = (p.img && editMode) ? '<span class="drag-hint">↕ drag to reposition</span>' : '';
+        return `<div class="proj">${del('proj', i)}<div class="cap ${editMode ? 'editable' : ''}" data-proj-img="${i}" ${cover}>${p.img ? hint : esc(p.cap)}</div><div class="body"><h4 ${ed('proj', i, 'name')}>${esc(p.name)}</h4><p ${ed('proj', i, 'desc')}>${esc(p.desc)}</p><div class="tag" ${ed('proj', i, 'tag')}>${esc(p.tag)}</div></div></div>`;
+      }).join('');
+      document.querySelectorAll('[data-proj-img]').forEach(el => {
+        const idx = +el.dataset.projImg;
+        if (editMode) {
+          if (D.proj[idx] && D.proj[idx].img) el.classList.add('grabbable');
+          el.addEventListener('mousedown', e => {
+            const m = (el.style.backgroundPosition || '50% 50%').match(/([\d.]+)%\s*([\d.]+)%/);
+            _drag = { el, bg: true, sx: e.clientX, sy: e.clientY, px: m ? +m[1] : 50, py: m ? +m[2] : 50, moved: false };
+          });
+        }
+      });
       // custom sections
       renderCustom();
       // suggestions
@@ -1543,6 +1651,7 @@
     document.addEventListener('input', e => {
       const t = e.target; if (!t.isContentEditable) return; const ds = t.dataset;
       if (ds.k !== undefined) { D[ds.k] = (HTMLK.has(ds.k) || ds.html) ? t.innerHTML : t.textContent; }
+      else if (ds.lk !== undefined) { if (!D.labels) D.labels = {}; D.labels[ds.lk] = t.textContent; }
       else if (ds.arr !== undefined) { if (ds.field) D[ds.arr][+ds.idx][ds.field] = t.textContent; else D[ds.arr][+ds.idx] = t.textContent; }
       else if (ds.ctitle !== undefined) { D.custom[+ds.ctitle].title = t.textContent; }
       else if (ds.citem !== undefined) { D.custom[+ds.citem].items[+ds.iidx][ds.field] = t.textContent; }
@@ -1567,10 +1676,41 @@
       const d = e.target.closest('[data-del]'); if (d) { D[d.dataset.del].splice(+d.dataset.i, 1); render(); }
     });
 
+    /* drag-to-reposition */
+    let _drag = null;
+    document.addEventListener('mousemove', e => {
+      if (!_drag || !editMode) return;
+      const dx = e.clientX - _drag.sx, dy = e.clientY - _drag.sy;
+      if (!_drag.moved && Math.abs(dx) < 5 && Math.abs(dy) < 5) return;
+      _drag.moved = true;
+      _drag.el.classList.replace('grabbable', 'grabbing');
+      const w = _drag.el.offsetWidth || 1, h = _drag.el.offsetHeight || 1;
+      const nx = Math.max(0, Math.min(100, _drag.px - dx / w * 100));
+      const ny = Math.max(0, Math.min(100, _drag.py - dy / h * 100));
+      const pos = nx.toFixed(1) + '% ' + ny.toFixed(1) + '%';
+      if (_drag.bg) { _drag.el.style.backgroundPosition = pos; D.proj[+_drag.el.dataset.projImg].imgPos = pos; }
+      else { _drag.el.style.objectPosition = pos; P.photoPos = pos; }
+    });
+    document.addEventListener('mouseup', e => {
+      if (!_drag) return;
+      const wasMoved = _drag.moved;
+      const el = _drag.el, bg = _drag.bg;
+      el.classList.replace('grabbing', 'grabbable');
+      _drag = null;
+      // if no movement → treat as click (open file picker)
+      if (!wasMoved && editMode) {
+        if (bg) pickProjImg(+el.dataset.projImg);
+        else pickImg(d => { P.photo = d; P.photoPos = '50% 20%'; render(); });
+      }
+    });
+
     /* images + resume */
-    $('photoPh').addEventListener('click', () => { if (editMode) pickImg(d => { P.photo = d; render(); }); });
+    $('photoPh').addEventListener('click', () => {
+      // click on the placeholder (no photo yet) → pick image
+      if (editMode && !P.photo) pickImg(d => { P.photo = d; P.photoPos = '50% 20%'; render(); });
+    });
     function pickImg(cb) { const i = document.createElement('input'); i.type = 'file'; i.accept = 'image/*'; i.onchange = ev => { const f = ev.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => cb(r.result); r.readAsDataURL(f); }; i.click(); }
-    function pickProjImg(i) { pickImg(d => { D.proj[i].img = d; render(); }); }
+    function pickProjImg(i) { pickImg(d => { D.proj[i].img = d; D.proj[i].imgPos = '50% 50%'; render(); }); }
     $('resumeBtn').onclick = () => { const i = document.createElement('input'); i.type = 'file'; i.accept = 'application/pdf'; i.onchange = ev => { const f = ev.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { P.resumeData = r.result; P.resumeName = f.name; render(); alert('Resume ready. Click "Download CV" to test.'); }; r.readAsDataURL(f); }; i.click(); };
 
     /* theme */
@@ -1586,30 +1726,32 @@
     $('pinOk').onclick = tryPin; $('pinInput').addEventListener('keydown', e => { if (e.key === 'Enter') tryPin(); }); $('pinCancel').onclick = () => $('pinModal').classList.remove('show');
 
     /* export */
-    $('exportBtn').onclick = () => { const out = { profile: { name: P.name, nick: P.nick, location: P.location, email: P.email, linkedin: P.linkedin, whatsapp: P.whatsapp, resumeUrl: P.resumeUrl, photo: P.photo }, content: D }; $('jsonOut').value = JSON.stringify(out, null, 2); $('modal').classList.add('show'); };
+    $('exportBtn').onclick = () => { const out = { profile: { name: P.name, nick: P.nick, location: P.location, email: P.email, linkedin: P.linkedin, whatsapp: P.whatsapp, resumeUrl: P.resumeUrl, photo: P.photo, photoPos: P.photoPos }, content: D }; $('jsonOut').value = JSON.stringify(out, null, 2); $('modal').classList.add('show'); };
     $('closeModal').onclick = () => $('modal').classList.remove('show');
     $('copyJson').onclick = () => { $('jsonOut').select(); try { document.execCommand('copy'); const b = $('copyJson'); b.textContent = '✓'; setTimeout(() => b.textContent = 'Copy', 1200); } catch (e) { } };
 
     /* AI chat */
     function buildContext() {
-      return `You are the AI assistant embedded on the portfolio website of Teguh Saputra Monoarfa (nickname Teguh). Your ONLY job is to answer questions about Teguh based on his uploaded resume. Reply in English or Indonesia. Be warm, concise (2-5 sentences), specific, and use his real numbers. Speak about him in third person. Emphasize his technical and AI work when relevant. If a question is unrelated to Teguh's professional profile, politely say you can only answer questions about Teguh's background and suggest what they could ask.
+      return `You are the AI assistant embedded on the portfolio website of Teguh Saputra Monoarfa (nickname Teguh). Your ONLY job is to answer questions about Teguh based on his resume. Reply in English or Indonesian (match the user's language). Be warm, concise (2-4 sentences), specific, and use his real numbers. Speak about him in third person. Emphasize his technical and AI work when relevant. If a question is unrelated to Teguh's professional profile, politely say you can only answer questions about Teguh's background and suggest what they could ask.
 
-=== RESUME ===
-NAME: Teguh Saputra Monoarfa. Location: Jakarta, Indonesia. Email: teguhsaputra412@gmail.com. LinkedIn: linkedin.com/in/teguhsaputra412.
-TITLE: Growth & Business Operations generalist | Product Consultant & Implementation | Customer Experience.
-SUMMARY: Built a CX function from the ground up at a B2B SaaS, led CS teams across regional e-commerce (Lazada PH, Temu EU), runs operations across tooling, data and AI. Thinks in CSAT, churn, retention, feature adoption; builds reporting tools and dashboards; translates user needs into processes and product decisions. Detail-oriented, fast learner, deeply committed to learning and building with AI.
-EXPERIENCE:
-1) Dealls, Jakarta — Product Consultant & Implementation Specialist, KantorKu HRIS (B2B SaaS) — Nov 2024–Present. Rebuilt the CX function (team restructuring, knowledge base, quarterly targets). Designed & ran CSAT dashboard + weekly reporting: 97.9% CSAT and 82.4% ISS. Identified churn drivers (feature mismatch, failed adoption) and fed them to Product & Engineering. Managed HRIS implementation across 300+ companies / 6,000+ headcount; time-to-value <15 days; 100% retention (2026). Owned prompt engineering & deployment of internal AI agent KIRA (daily team tool). Analyzed chat history across personas (HR Admin, Employee, Prospect) with AI tools to produce structured FAQs, product insights, recommendations.
-2) Transcosmos Indonesia, Yogyakarta — Customer Service Team Leader, Lazada (PH) — Jun–Nov 2024. Led 15 agents; 71.85% CSAT; daily coaching; promoted SME → Team Leader in 2 months.
-3) Teleperformance Indonesia, Yogyakarta — Customer Resolution Senior Specialist (Tier 2), Temu (EU) — Jan–Jun 2024. Complex Tier 2 escalations; documentation reduced Tier 2 escalation volume by 82%; promoted Tier 1 → Tier 2 in 1 month.
-SKILLS: CX strategy, dashboards & reporting, knowledge management, vendor evaluation, onboarding & training, churn & retention analysis, KPI tracking; Python, SQL, Excel, Google Sheets, Tableau, EDA, visualization; JIRA, Confluence, Trello, Coda; AI/LLM & prompt engineering; Claude, ChatGPT, Gemini, Deepseek, Ollama, Groq; Vercel, Netlify, Google Apps Script; team management, coaching, cross-functional collaboration. Languages: Bahasa Indonesia (native), English (professional working), Indonesian Sign Language BISINDO Level 2.
-PROJECTS: User Onboarding & Training Program; Prompt Engineering & Integration of CX AI Agent KIRA; Product Knowledge Base Dashboard; CX Analytics Dashboard (CSAT & ISS); Client Analytics Dashboard (churn, renewal & retention).
-EDUCATION: Universitas Negeri Gorontalo (UNG), Bachelor of Communication, 2016–2023, GPA 3.65/4.00.
-CERTIFICATIONS: BISINDO Level 2 (2026); Alibaba Cloud Big Data Certified (2024); DBS Foundation Coding Camp ML Developer (2024); Indosat IOH ID.CAMP Data Scientist (2023); Lintasarta Cloudeka Digischool ML (2023).
-=== END RESUME ===`;
+FORMATTING: Write in plain conversational prose. Do NOT use markdown tables, headers (#), or code blocks. You may use **bold** sparingly for key numbers and a simple "- " bullet list only when listing 3+ distinct items. Keep it short and easy to read in a chat bubble.`;
     }
     const box = $('chatbox'), input = $('chatinput'), sendBtn = $('chatsend'), history = [];
-    function addMsg(text, who) { const el = document.createElement('div'); el.className = 'msg ' + who; el.textContent = text; box.appendChild(el); box.scrollTop = box.scrollHeight; return el; }
+    // Lightweight + safe markdown for bot replies: escape first, then bold / bullets / line breaks.
+    function renderMd(s) {
+      let h = esc(s.trim());
+      h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');           // **bold**
+      const lines = h.split('\n');
+      let out = '', inList = false;
+      for (const ln of lines) {
+        const m = ln.match(/^\s*[-*]\s+(.*)$/);
+        if (m) { if (!inList) { out += '<ul>'; inList = true; } out += '<li>' + m[1] + '</li>'; }
+        else { if (inList) { out += '</ul>'; inList = false; } out += ln + '<br>'; }
+      }
+      if (inList) out += '</ul>';
+      return out.replace(/(<br>)+$/, '');
+    }
+    function addMsg(text, who) { const el = document.createElement('div'); el.className = 'msg ' + who; if (who === 'bot') el.innerHTML = renderMd(text); else el.textContent = text; box.appendChild(el); box.scrollTop = box.scrollHeight; return el; }
     async function send(q) {
       if (!q.trim()) return;
       if (!box.classList.contains('show')) { box.classList.add('show'); addMsg(D.ai_hello, 'bot'); }
