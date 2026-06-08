@@ -2,7 +2,7 @@
 
 > *"I'm not a developer. I've never written a line of production code in my life. But I just shipped a live portfolio with a built-in AI assistant, and I did it in days, not months."*
 
-🌐 **Live site → [web-portfolio-teguh.vercel.app](https://web-portfolio-teguh.vercel.app/)**
+🌐 **Live site → [teguh-web-portfolio.vercel.app](https://teguh-web-portfolio.vercel.app/)**
 
 ---
 
@@ -73,4 +73,4 @@ I'm one of those people. This portfolio is the evidence.
 
 *Built entirely with AI assistance. Designed with intention. Deployed with one push.*
 
-**→ [web-portfolio-teguh.vercel.app](https://web-portfolio-teguh.vercel.app/)**
+**→ [teguh-web-portfolio.vercel.app](https://teguh-web-portfolio.vercel.app/)**
