@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Teguh Web Portfolio — Logo Mark -->
+  <!-- Dark version. For light version swap bg to #f4f7ff + indigo to #4f46e5 + ocean to #0891b2 -->
+
+  <!-- Background -->
+  <rect width="200" height="200" rx="32" fill="#0c1228"/>
+
+  <!-- T stem (indigo) -->
+  <rect x="80" y="22" width="40" height="154" rx="6" fill="#5b63f0"/>
+
+  <!-- T bar (ocean, overlays stem top) -->
+  <rect x="24" y="22" width="152" height="42" rx="6" fill="#2ed3e6"/>
+
+  <!-- Sparkle accent — bottom right -->
+  <path d="M162,183 L164,189 L171,190.5 L164,192 L162,198 L160,192 L153,190.5 L160,189 Z" fill="#2ed3e6"/>
+
+  <!-- Dot accent — top left -->
+  <circle cx="34" cy="34" r="4" fill="#5b63f0" opacity="0.6"/>
+</svg>

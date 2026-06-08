@@ -12,7 +12,7 @@
   },
   "content": {
     "brand": "Teguh Web Portfolio",
-    "status": "Open to opportunities · Growth · BizOps · CX Ops",
+    "status": "Open to opportunities · BizOps · CX Ops · Technical Support",
     "ai_h": "Ask me anything <span class=\"grad\">about my experience.</span>",
     "ai_tag": "This portfolio has a built-in AI assistant trained on my resume. Get straight answers about my work, impact, and skills before we even talk.",
     "ai_hello": "Hi! I'm Teguh's AI assistant, and I know his resume inside out. Ask me about his experience, impact, projects, or how he works with AI. 👋",
@@ -22,8 +22,8 @@
       "What are his biggest professional achievements?"
     ],
     "ai_ph": "Type your question…  e.g. What are his biggest achievements?",
-    "hero_h1": "Growth &amp; <em>Business Operations</em> generalist who builds with AI.",
-    "role": "Product Consultant & Implementation · KantorKu HRIS (Dealls)",
+    "hero_h1": "<em>Business Operations</em> &amp; Product Expert.",
+    "role": "Product Consultant & Implementation Specialist · KantorKu HRIS (Dealls)",
     "bio": "Built a Customer Experience function from the ground up at a B2B SaaS, led CS teams across regional e-commerce (Lazada PH, Temu EU), and run operations across tooling, data, and AI. I think in metrics and feature adoption then build the dashboards and AI agents that move them, learning and shipping with AI every day.",
     "chips": [
       "CX Strategy",
@@ -97,7 +97,7 @@
       "Netlify",
       "CX Strategy",
       "Churn & Retention",
-      "KPI & Reporting",
+      "Reporting & Analysis",
       "Google Workspace",
       "JIRA",
       "Confluence",
@@ -106,7 +106,9 @@
       "VS Code",
       "Technical Support",
       "Data Management",
-      "Data Visualization"
+      "Data Visualization",
+      "Product Implementation",
+      "Product Consulting"
     ],
     "beyond": [
       {
@@ -189,7 +191,7 @@
       }
     ],
     "cta_h": "Let's talk.",
-    "cta_p": "Open to Growth, CX Ops, BizOps & AI-focused roles - Remote Available",
+    "cta_p": "Open to BizOps, CX Ops, Technical Support & AI-Focused Roles - Remote Available",
     "labels": {
       "about": "About",
       "exp": "Experience",

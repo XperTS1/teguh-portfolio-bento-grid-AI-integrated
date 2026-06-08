@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teguh Web Portfolio</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
@@ -689,8 +689,13 @@
       -webkit-user-drag: none
     }
 
-    .photo-ph img.grabbable { cursor: grab }
-    .photo-ph img.grabbing  { cursor: grabbing }
+    .photo-ph img.grabbable {
+      cursor: grab
+    }
+
+    .photo-ph img.grabbing {
+      cursor: grabbing
+    }
 
     .drag-hint {
       position: absolute;
@@ -700,17 +705,25 @@
       font-size: 10px;
       font-weight: 600;
       letter-spacing: .04em;
-      color: rgba(255,255,255,.9);
-      background: rgba(0,0,0,.45);
+      color: rgba(255, 255, 255, .9);
+      background: rgba(0, 0, 0, .45);
       padding: 3px 10px;
       border-radius: 20px;
       pointer-events: none;
       white-space: nowrap
     }
 
-    .cap.grabbable { cursor: grab }
-    .cap.grabbing  { cursor: grabbing }
-    .cap .drag-hint { bottom: 6px }
+    .cap.grabbable {
+      cursor: grab
+    }
+
+    .cap.grabbing {
+      cursor: grabbing
+    }
+
+    .cap .drag-hint {
+      bottom: 6px
+    }
 
     .photo-ph.editable {
       cursor: pointer
@@ -1251,13 +1264,33 @@
     }
 
     @media(max-width:1024px) {
-      .c-hero { grid-column: span 7 }
-      .c-photo { grid-column: span 5 }
-      .c-exp { grid-column: span 6 }
-      .c-edu { grid-column: span 6 }
-      .c-skills { grid-column: span 6 }
-      .c-extra { grid-column: span 6 }
-      .proj-grid { grid-template-columns: repeat(2, 1fr) }
+      .c-hero {
+        grid-column: span 7
+      }
+
+      .c-photo {
+        grid-column: span 5
+      }
+
+      .c-exp {
+        grid-column: span 6
+      }
+
+      .c-edu {
+        grid-column: span 6
+      }
+
+      .c-skills {
+        grid-column: span 6
+      }
+
+      .c-extra {
+        grid-column: span 6
+      }
+
+      .proj-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
     }
 
     @media(max-width:880px) {
@@ -1301,7 +1334,10 @@
   <div class="wrap">
 
     <div class="top">
-      <div class="brand"><span class="dot"></span> <span id="brand" data-k="brand"></span></div>
+      <div class="brand">
+        <img src="/images/favicon.svg" alt="Logo" style="width:32px;height:32px;border-radius:8px;display:block">
+        <span id="brand" data-k="brand"></span>
+      </div>
       <div class="controls">
         <div class="status"><span style="color:var(--ocean)">●</span> <span id="status" data-k="status"></span></div>
         <button class="iconbtn" id="editBtn" title="Edit content" aria-label="Edit content"></button>
@@ -1426,7 +1462,7 @@
       </div>
 
     </div>
-    <footer>© 2026 Teguh Saputra Monoarfa · built &amp; deployed with AI</footer>
+    <footer>© 2026 Teguh Saputra Monoarfa · Personal Web Portfolio</footer>
   </div>
 
   <div class="modal" id="pinModal">
@@ -1463,8 +1499,8 @@
       photoPos: "50% 20%"
     };
 
-    const IC_USER  = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>`;
-    const IC_PIN   = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>`;
+    const IC_USER = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>`;
+    const IC_PIN = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>`;
     const IC_EMAIL = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6 9 6 9-6"/></svg>`;
 
     const D = {
@@ -1545,9 +1581,9 @@
       $('chatinput').placeholder = D.ai_ph;
       // photo / identity
       const nameAttr = editMode ? `contenteditable="true" data-p="name"` : '';
-      const locAttr  = editMode ? `contenteditable="true" data-p="location"` : '';
+      const locAttr = editMode ? `contenteditable="true" data-p="location"` : '';
       $('photoName').innerHTML = `<span ${nameAttr}>${esc(P.name)}</span>`;
-      $('photoLoc').innerHTML  = `${IC_PIN} <span ${locAttr}>${esc(P.location)}</span>`;
+      $('photoLoc').innerHTML = `${IC_PIN} <span ${locAttr}>${esc(P.location)}</span>`;
       const ph = $('photoPh');
       if (P.photo) {
         const pos = P.photoPos || '50% 20%';
@@ -1567,8 +1603,8 @@
       }
       ph.classList.toggle('editable', editMode);
       // contact
-      $('cmName').innerHTML  = `${IC_USER}  <span ${ep('name')}>${esc(P.name)}</span>`;
-      $('cmLoc').innerHTML   = `${IC_PIN}   <span ${ep('location')}>${esc(P.location)}</span>`;
+      $('cmName').innerHTML = `${IC_USER}  <span ${ep('name')}>${esc(P.name)}</span>`;
+      $('cmLoc').innerHTML = `${IC_PIN}   <span ${ep('location')}>${esc(P.location)}</span>`;
       $('cmEmail').innerHTML = `${IC_EMAIL} <span ${ep('email')}>${esc(P.email)}</span>`;
       $('contactEdit').innerHTML = editMode ? `
     <div class="cedit"><b>LinkedIn:</b> <span ${ep('linkedin')}>${esc(P.linkedin)}</span></div>
@@ -1596,7 +1632,7 @@
       $('projGrid').innerHTML = D.proj.map((p, i) => {
         const bgPos = p.imgPos || '50% 50%';
         const cover = p.img ? `style="background-image:url(${p.img});background-position:${bgPos}"` : '';
-        const hint  = (p.img && editMode) ? '<span class="drag-hint">↕ drag to reposition</span>' : '';
+        const hint = (p.img && editMode) ? '<span class="drag-hint">↕ drag to reposition</span>' : '';
         return `<div class="proj">${del('proj', i)}<div class="cap ${editMode ? 'editable' : ''}" data-proj-img="${i}" ${cover}>${p.img ? hint : esc(p.cap)}</div><div class="body"><h4 ${ed('proj', i, 'name')}>${esc(p.name)}</h4><p ${ed('proj', i, 'desc')}>${esc(p.desc)}</p><div class="tag" ${ed('proj', i, 'tag')}>${esc(p.tag)}</div></div></div>`;
       }).join('');
       document.querySelectorAll('[data-proj-img]').forEach(el => {
