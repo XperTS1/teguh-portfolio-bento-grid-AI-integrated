@@ -4,7 +4,7 @@
   "private": true,
   "description": "AI-powered bento portfolio for Teguh Saputra Monoarfa (static site + Groq serverless chat).",
   "scripts": {
-    "dev": "vercel dev",
-    "deploy": "vercel --prod"
+    "dev": "node server.js",
+    "start": "node server.js"
   }
 }

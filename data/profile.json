@@ -7,7 +7,7 @@
     "linkedin": "https://www.linkedin.com/in/teguhsaputra412/",
     "whatsapp": "https://api.whatsapp.com/send/?phone=6282291648646&text&type=phone_number&app_absent=0",
     "resumeUrl": "https://docs.google.com/document/d/1jOuzwezYQ1KTYdAsgUYu0ffU5Al1EzScqOtmO4dR094/export?format=pdf",
-    "photo": "/images/photo.png",
+    "photo": "/images/photo.webp",
     "photoPos": "50% 20%"
   },
   "content": {
@@ -130,14 +130,14 @@
         "cap": "📸 KIRA agent screenshot",
         "desc": "Prompt engineering & integration of an internal AI agent, now a daily tool across teams.",
         "tag": "AI · Prompt Engineering",
-        "img": "/images/proj-0.png"
+        "img": "/images/proj-0.webp"
       },
       {
         "name": "Knowledge Base Dashboard",
         "cap": "📸 KB dashboard screenshot",
         "desc": "FAQs, KB articles & video tutorials in one product knowledge hub.",
         "tag": "Dashboard · Knowledge Management",
-        "img": "/images/proj-1.png",
+        "img": "/images/proj-1.webp",
         "imgPos": "48.8% 0.0%"
       },
       {
@@ -145,7 +145,7 @@
         "cap": "📸 CSAT/ISS dashboard",
         "desc": "CSAT & ISS analytics: KPI cards, trends, leaderboard, Voice of Customer.",
         "tag": "Dashbaord · CSAT",
-        "img": "/images/proj-2.png",
+        "img": "/images/proj-2.webp",
         "imgPos": "52.3% 100.0%"
       },
       {
@@ -153,21 +153,21 @@
         "cap": "📸 client dashboard",
         "desc": "Client database with churn, renewal & retention tracking.",
         "tag": "Dashboard · Clients Database",
-        "img": "/images/proj-3.png"
+        "img": "/images/proj-3.webp"
       },
       {
         "name": "User Onboarding Program",
         "cap": "📸 onboarding flow",
         "desc": "End-to-end onboarding & training, translating business needs into product solutions.",
         "tag": "Implementation · Enablement",
-        "img": "/images/proj-4.png"
+        "img": "/images/proj-4.webp"
       },
       {
         "name": "Safedrip IWM - Healthcare Web App",
         "cap": "📸 add a screenshot",
         "desc": "A healthcare app checking injectable antibiotic and fluid compatibility.",
         "tag": "Web App · Healthcare",
-        "img": "/images/proj-5.png",
+        "img": "/images/proj-5.webp",
         "imgPos": "46.6% 0.0%"
       },
       {
@@ -175,7 +175,7 @@
         "cap": "📸 add a screenshot",
         "desc": "Design, build & deploy personal web project using AI.",
         "tag": "Web · Portfolio",
-        "img": "/images/proj-6.png",
+        "img": "/images/proj-6.webp",
         "imgPos": "48.9% 0.0%"
       }
     ],

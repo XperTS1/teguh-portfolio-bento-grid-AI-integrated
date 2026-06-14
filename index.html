@@ -24,7 +24,7 @@
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <style>
     :root {
@@ -1380,7 +1380,7 @@
             <h2 id="ai_h" data-k="ai_h" data-html="1"></h2>
             <p class="ai-tag" id="ai_tag" data-k="ai_tag"></p>
             <div class="ai-input">
-              <input id="chatinput" autocomplete="off">
+              <input id="chatinput" autocomplete="off" maxlength="500">
               <button id="chatsend">Ask →</button>
             </div>
             <div class="suggest" id="suggest"></div>
@@ -1495,7 +1495,7 @@
     <div class="box">
       <h3>Your profile.json</h3>
       <p>Copy this and replace <b>data/profile.json</b> in your GitHub repo. Push → Vercel redeploys with your edits.
-        (Tip: large images bloat the JSON — for big screenshots drop files in <b>/public</b> and reference the path.)
+        (Tip: large images bloat the JSON — for big screenshots drop files in <b>/images</b> and reference the path.)
       </p>
       <textarea id="jsonOut" readonly></textarea>
       <div class="mrow"><button class="btn s" id="copyJson">Copy</button><button class="btn s"
@@ -1511,7 +1511,7 @@
       email: "teguhsaputra412@gmail.com",
       linkedin: "https://www.linkedin.com/in/teguhsaputra412/",
       whatsapp: "https://api.whatsapp.com/send/?phone=6282291648646&text&type=phone_number&app_absent=0",
-      resumeUrl: "https://docs.google.com/document/d/1jOuzwezYQ1KTYdAsgUYu0ffU5Al1EzScqOtmO4dR094/export?format=pdf", resumeData: null, resumeName: null, photo: null,
+      resumeUrl: "https://docs.google.com/document/d/1jOuzwezYQ1KTYdAsgUYu0ffU5Al1EzScqOtmO4dR094/export?format=pdf", resumeData: null, resumeName: null, photo: "/images/photo.webp",
       photoPos: "50% 20%"
     };
 
@@ -1520,47 +1520,209 @@
     const IC_EMAIL = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6 9 6 9-6"/></svg>`;
 
     const D = {
-      brand: "Teguh Web Portfolio",
-      status: "Open to opportunities · Growth · BizOps · AI Ops",
-      ai_h: "Ask my AI anything <span class=\"grad\">about my experience.</span>",
-      ai_tag: "This portfolio has a built-in AI assistant trained on my resume. Get straight answers about my work, impact, and skills — before we even talk.",
-      ai_hello: "Hi! I'm Teguh's AI assistant, and I know his resume inside out. Ask me about his experience, impact, projects, or how he works with AI. 👋",
-      suggest: [],
-      ai_ph: "Type your question…  e.g. What are his biggest achievements?",
-      hero_h1: "Growth &amp; <em>Business Operations</em> generalist who builds with AI.",
-      role: "Product Consultant & Implementation · KantorKu HRIS (Dealls)",
-      bio: "Built a Customer Experience function from the ground up at a B2B SaaS, led CS teams across regional e-commerce (Lazada PH, Temu EU), and run operations across tooling, data, and AI. I think in CSAT, churn, retention, and adoption — then build the dashboards and AI agents that move them, learning and shipping with AI every day.",
-      chips: ["CX Strategy", "Analytics", "AI Agents", "Prompt Engineering", "Implementation"],
-      metrics: [
-        { display: "97.9%", cap: "CSAT achieved (KantorKu)" },
-        { display: "300+", cap: "companies onboarded to HRIS" },
-        { display: "6,000+", cap: "headcount under management" },
-        { display: "82%", cap: "fewer Tier-2 escalations (Temu)" }
+      "brand": "Teguh Web Portfolio",
+      "status": "Open to opportunities · BizOps · CX Ops · Technical Support",
+      "ai_h": "Ask me anything <span class=\"grad\">about my experience.</span>",
+      "ai_tag": "This portfolio has a built-in AI assistant trained on my resume. Get straight answers about my work, impact, and skills before we even talk.",
+      "ai_hello": "Hi! I'm Teguh's AI assistant, and I know his resume inside out. Ask me about his experience, impact, projects, or how he works with AI. 👋",
+      "suggest": [
+        "What makes him stand out as a candidate?",
+        "Walk me through his career journey.",
+        "What are his biggest professional achievements?"
       ],
-      exp: [
-        { yr: "Nov 2024 — now", role: "Product Consultant & Implementation Specialist", co: "Dealls · KantorKu HRIS (B2B SaaS)", d: "Rebuilt the CX function end-to-end; ran the CSAT dashboard & weekly reporting (97.9% CSAT, 82.4% ISS); led HRIS implementation across 300+ companies / 6,000+ headcount with <15-day time-to-value & 100% retention; owned prompt engineering & deployment of the KIRA AI agent." },
-        { yr: "Jun — Nov 2024", role: "Customer Service Team Leader", co: "Transcosmos · Lazada (PH Market)", d: "Led 15 agents to 71.85% CSAT; daily coaching & calibration. Fast-tracked from SME to Team Leader in 2 months." },
-        { yr: "Jan — Jun 2024", role: "Customer Resolution Senior Specialist (Tier 2)", co: "Teleperformance · Temu (EU Market)", d: "Handled complex Tier 2 escalations; authored documentation that cut Tier 2 escalation volume by 82%. Promoted Tier 1 → Tier 2 in 1 month." }
+      "ai_ph": "Type your question…  e.g. What are his biggest achievements?",
+      "hero_h1": "<em>Business Operations</em> &amp; Product Expert.",
+      "role": "Product Consultant & Implementation Specialist · KantorKu HRIS (Dealls)",
+      "bio": "Built a Customer Experience function from the ground up at a B2B SaaS, led CS teams across regional e-commerce (Lazada PH, Temu EU), and run operations across tooling, data, and AI. I think in metrics and feature adoption then build the dashboards and AI agents that move them, learning and shipping with AI every day.",
+      "chips": [
+        "CX Strategy",
+        "Analytics",
+        "AI Agents",
+        "Prompt Engineering",
+        "Implementation",
+        "Product Consultant"
       ],
-      edu: [{ school: "Universitas Negeri Gorontalo (UNG)", meta: "Bachelor of Communication · 2016 – 2023", gpa: "GPA 3.65 / 4.00" }],
-      cert: ["BISINDO Level 2 — Indonesian Sign Language (2026)", "Alibaba Cloud Academy — Big Data Certified (2024)", "DBS Foundation Coding Camp — ML Developer (2024)", "Indosat IOH ID.CAMP — Data Scientist Program (2023)", "Lintasarta Cloudeka Digischool — ML Program (2023)"],
-      skills: ["Prompt Engineering", "AI Agents", "Python", "SQL", "Tableau", "Excel / Sheets", "Google Apps Script", "Vercel", "Netlify", "CX Strategy", "Churn & Retention", "KPI & Reporting", "Vendor Evaluation", "JIRA", "Confluence", "Coda"],
-      beyond: [
-        { t: "🤖 Learning & Building with AI", d: "Daily AI use, prompt engineering & agent building as a long-term focus." },
-        { t: "⚙️ Vibe Coding", d: "Ships dashboards & internal tools with AI — no formal dev background." },
-        { t: "🧰 AI Platforms", d: "Claude, ChatGPT, Gemini, Deepseek, Ollama, Groq." }
+      "metrics": [
+        {
+          "display": "97.9%",
+          "cap": "CSAT achieved (KantorKu HRIS)"
+        },
+        {
+          "display": "300+",
+          "cap": "companies onboarded to HRIS"
+        },
+        {
+          "display": "6,000+",
+          "cap": "headcount under management"
+        },
+        {
+          "display": "82%",
+          "cap": "fewer Tier-2 escalations (Temu)"
+        }
       ],
-      proj: [
-        { name: "KIRA — CX AI Agent", cap: "📸 KIRA agent screenshot", desc: "Prompt engineering & integration of an internal AI agent, now a daily tool across teams.", tag: "AI · Prompt Engineering", img: null },
-        { name: "Knowledge Base Dashboard", cap: "📸 KB dashboard screenshot", desc: "FAQs, KB articles & video tutorials in one product knowledge hub.", tag: "Vercel · Knowledge Mgmt", img: null },
-        { name: "CX Analytics Dashboard", cap: "📸 CSAT/ISS dashboard", desc: "CSAT & ISS analytics: KPI cards, trends, leaderboard, Voice of Customer.", tag: "Data Viz · Reporting", img: null },
-        { name: "Client Analytics Dashboard", cap: "📸 client dashboard", desc: "Client database with churn, renewal & retention tracking.", tag: "Analytics · Retention", img: null },
-        { name: "User Onboarding Program", cap: "📸 onboarding flow", desc: "End-to-end onboarding & training, translating business needs into product solutions.", tag: "Implementation · Enablement", img: null }
+      "exp": [
+        {
+          "yr": "Nov 2024 — now",
+          "role": "Product Consultant & Implementation Specialist",
+          "co": "Dealls · KantorKu HRIS (B2B SaaS)",
+          "d": "Rebuilt the CX function end-to-end; ran the CSAT dashboard & weekly reporting (97.9% CSAT, 82.4% ISS); led HRIS implementation across 300+ companies / 6,000+ headcount with <15-day time-to-value & 100% retention; owned prompt engineering & deployment of the KIRA AI agent."
+        },
+        {
+          "yr": "Jun — Nov 2024",
+          "role": "Customer Service Team Leader",
+          "co": "Transcosmos · Lazada (PH Market)",
+          "d": "Led 15 agents to 71.85% CSAT; daily coaching & calibration. Fast-tracked from SME to Team Leader in 2 months."
+        },
+        {
+          "yr": "Jan — Jun 2024",
+          "role": "Customer Resolution Senior Specialist (Tier 2)",
+          "co": "Teleperformance · Temu (EU Market)",
+          "d": "Handled complex Tier 2 escalations; authored documentation that cut Tier 2 escalation volume by 82%. Promoted Tier 1 → Tier 2 in 1 month."
+        }
       ],
-      custom: [],
-      cta_h: "Let's talk.",
-      cta_p: "Open to Growth, BizOps & AI-focused roles.",
-      labels: { about: "About", exp: "Experience", edu: "Education", cert: "Certifications", skills: "Skills & Tools", extra: "AI & Tooling", proj: "Projects" }
+      "edu": [
+        {
+          "school": "Universitas Negeri Gorontalo (UNG)",
+          "meta": "Bachelor of Communication · 2016 – 2023",
+          "gpa": "GPA 3.65 / 4.00"
+        }
+      ],
+      "cert": [
+        "BISINDO Level 2 — Indonesian Sign Language (2026)",
+        "Alibaba Cloud Academy — Big Data Certified (2024)",
+        "DBS Foundation Coding Camp — ML Developer (2024)",
+        "Indosat IOH ID.CAMP — Data Scientist Program (2023)",
+        "Lintasarta Cloudeka Digischool — ML Program (2023)"
+      ],
+      "skills": [
+        "Prompt Engineering",
+        "AI Agents",
+        "Python",
+        "SQL",
+        "Tableau",
+        "Excel / Sheets",
+        "Google Apps Script",
+        "Vercel",
+        "Netlify",
+        "CX Strategy",
+        "Churn & Retention",
+        "Reporting & Analysis",
+        "Google Workspace",
+        "JIRA",
+        "Confluence",
+        "Coda",
+        "Google Antigravity IDE",
+        "VS Code",
+        "Technical Support",
+        "Data Management",
+        "Data Visualization",
+        "Product Implementation",
+        "Product Consulting"
+      ],
+      "beyond": [
+        {
+          "t": "🤖 Learning & Building with AI",
+          "d": "Daily AI use, prompt engineering & agent building as a long-term focus."
+        },
+        {
+          "t": "⚙️ Vibe Coding",
+          "d": "Ships dashboards & internal tools with AI with no formal dev background."
+        },
+        {
+          "t": "🧰 AI Platforms",
+          "d": "Claude, ChatGPT, Gemini, Deepseek, Ollama, Groq."
+        }
+      ],
+      "proj": [
+        {
+          "name": "KIRA - CX AI Agent",
+          "cap": "📸 KIRA agent screenshot",
+          "desc": "Prompt engineering & integration of an internal AI agent, now a daily tool across teams.",
+          "tag": "AI · Prompt Engineering",
+          "img": "/images/proj-0.webp"
+        },
+        {
+          "name": "Knowledge Base Dashboard",
+          "cap": "📸 KB dashboard screenshot",
+          "desc": "FAQs, KB articles & video tutorials in one product knowledge hub.",
+          "tag": "Dashboard · Knowledge Management",
+          "img": "/images/proj-1.webp",
+          "imgPos": "48.8% 0.0%"
+        },
+        {
+          "name": "CX Analytics Dashboard",
+          "cap": "📸 CSAT/ISS dashboard",
+          "desc": "CSAT & ISS analytics: KPI cards, trends, leaderboard, Voice of Customer.",
+          "tag": "Dashbaord · CSAT",
+          "img": "/images/proj-2.webp",
+          "imgPos": "52.3% 100.0%"
+        },
+        {
+          "name": "Client Analytics Dashboard",
+          "cap": "📸 client dashboard",
+          "desc": "Client database with churn, renewal & retention tracking.",
+          "tag": "Dashboard · Clients Database",
+          "img": "/images/proj-3.webp"
+        },
+        {
+          "name": "User Onboarding Program",
+          "cap": "📸 onboarding flow",
+          "desc": "End-to-end onboarding & training, translating business needs into product solutions.",
+          "tag": "Implementation · Enablement",
+          "img": "/images/proj-4.webp"
+        },
+        {
+          "name": "Safedrip IWM - Healthcare Web App",
+          "cap": "📸 add a screenshot",
+          "desc": "A healthcare app checking injectable antibiotic and fluid compatibility.",
+          "tag": "Web App · Healthcare",
+          "img": "/images/proj-5.webp",
+          "imgPos": "46.6% 0.0%"
+        },
+        {
+          "name": "Personal Web Portfolio - AI Integrated",
+          "cap": "📸 add a screenshot",
+          "desc": "Design, build & deploy personal web project using AI.",
+          "tag": "Web · Portfolio",
+          "img": "/images/proj-6.webp",
+          "imgPos": "48.9% 0.0%"
+        }
+      ],
+      "custom": [
+        {
+          "title": "BEYOND WORK",
+          "items": [
+            {
+              "t": "🤟 Bahasa Isyarat Indonesia (BISINDO) - Sign Language",
+              "d": "Learning Indonesian sign language currently at Level 2 - inclusive communication with deaf community."
+            }
+          ]
+        },
+        {
+          "title": "QUOTES",
+          "items": [
+            {
+              "t": "Zig Ziglar",
+              "d": "You don't have to be great to start, but you have to start to be great."
+            },
+            {
+              "t": "Scott Belsky",
+              "d": "It's not about ideas. It's about making ideas happen."
+            }
+          ]
+        }
+      ],
+      "cta_h": "Let's talk.",
+      "cta_p": "Open to BizOps, CX Ops, Technical Support & AI-Focused Roles - Remote Available",
+      "labels": {
+        "about": "About",
+        "exp": "Experience",
+        "edu": "Education",
+        "cert": "Certifications",
+        "skills": "Skills & Tools",
+        "extra": "AI & Tooling",
+        "proj": "Projects"
+      }
     };
 
     let editMode = false, metricsAnimated = false;
@@ -1625,7 +1787,7 @@
       $('contactEdit').innerHTML = editMode ? `
     <div class="cedit"><b>LinkedIn:</b> <span ${ep('linkedin')}>${esc(P.linkedin)}</span></div>
     <div class="cedit"><b>WhatsApp:</b> <span ${ep('whatsapp')}>${esc(P.whatsapp)}</span></div>
-    <div class="cedit"><b>Resume path (/public):</b> <span ${ep('resumeUrl')}>${esc(P.resumeUrl)}</span></div>` : '';
+    <div class="cedit"><b>Resume URL (Google Docs PDF export):</b> <span ${ep('resumeUrl')}>${esc(P.resumeUrl)}</span></div>` : '';
       $('ctaEmail').href = "mailto:" + P.email; $('ctaLi').href = P.linkedin; $('ctaWa').href = P.whatsapp;
       const cv = $('ctaCV');
       if (P.resumeData) { cv.href = P.resumeData; cv.setAttribute('download', P.resumeName || 'CV_Teguh_Saputra_Monoarfa.pdf'); }
@@ -1784,11 +1946,8 @@
     $('copyJson').onclick = () => { $('jsonOut').select(); try { document.execCommand('copy'); const b = $('copyJson'); b.textContent = '✓'; setTimeout(() => b.textContent = 'Copy', 1200); } catch (e) { } };
 
     /* AI chat */
-    function buildContext() {
-      return `You are the AI assistant embedded on the portfolio website of Teguh Saputra Monoarfa (nickname Teguh). Your ONLY job is to answer questions about Teguh based on his resume. Reply in English or Indonesian (match the user's language). Be warm, concise (2-4 sentences), specific, and use his real numbers. Speak about him in third person. Emphasize his technical and AI work when relevant. If a question is unrelated to Teguh's professional profile, politely say you can only answer questions about Teguh's background and suggest what they could ask.
-
-FORMATTING: Write in plain conversational prose. Do NOT use markdown tables, headers (#), or code blocks. You may use **bold** sparingly for key numbers and a simple "- " bullet list only when listing 3+ distinct items. Keep it short and easy to read in a chat bubble.`;
-    }
+    // NOTE: the system prompt + guardrails live SERVER-SIDE (api/chat.js & server.js).
+    // The client only sends the conversation messages; the server ignores any client prompt.
     const box = $('chatbox'), input = $('chatinput'), sendBtn = $('chatsend'), history = [];
     // Lightweight + safe markdown for bot replies: escape first, then bold / bullets / line breaks.
     function renderMd(s) {
@@ -1813,20 +1972,32 @@ FORMATTING: Write in plain conversational prose. Do NOT use markdown tables, hea
       const typing = document.createElement('div'); typing.className = 'msg bot'; typing.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>'; box.appendChild(typing); box.scrollTop = box.scrollHeight;
       history.push({ role: 'user', content: q });
       try {
-        const res = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ system: buildContext(), messages: history }) });
+        const res = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history }) });
         const data = await res.json();
         const txt = (data.text || "").trim() || (data.error ? ("⚠ " + data.error) : "Sorry, something went wrong. Try again.");
         typing.remove(); addMsg(txt, 'bot'); history.push({ role: 'assistant', content: txt });
-      } catch (e) { typing.remove(); addMsg("Couldn't reach the AI service. Locally, set GROQ_API_KEY in .env.local and run `vercel dev`. On Vercel, add it under Settings → Environment Variables.", 'bot'); }
+      } catch (e) { typing.remove(); addMsg("Couldn't reach the AI service. Locally, set GROQ_API_KEY in .env.local and run `node server.js`. On Vercel, add it under Settings → Environment Variables.", 'bot'); }
       sendBtn.disabled = false; input.focus();
     }
     sendBtn.onclick = () => send(input.value);
     input.addEventListener('keydown', e => { if (e.key === 'Enter') send(input.value) });
 
-    (async function init() {
-      try { const r = await fetch('/data/profile.json', { cache: 'no-store' }); if (r.ok) { const j = await r.json(); if (j.profile) Object.assign(P, j.profile); if (j.content) Object.assign(D, j.content); } } catch (e) { }
+    (function init() {
+      // Render instantly from the inline (synced) defaults — no blank flash, no waiting on network.
       render();
       setTimeout(() => document.body.classList.add('loaded'), 900);
+      // Then refresh from profile.json in the background; only re-render if it actually differs
+      // (e.g. content was edited & redeployed since this HTML was built).
+      fetch('/data/profile.json', { cache: 'no-store' })
+        .then(r => (r.ok ? r.json() : null))
+        .then(j => {
+          if (!j) return;
+          const before = JSON.stringify([P, D]);
+          if (j.profile) Object.assign(P, j.profile);
+          if (j.content) Object.assign(D, j.content);
+          if (JSON.stringify([P, D]) !== before) render();
+        })
+        .catch(() => { });
     })();
   </script>
 </body>
