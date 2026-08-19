@@ -60,6 +60,9 @@ node server.js        # lalu buka http://localhost:3000
 ### 2026-08-19 — Perbaikan tampilan (commit "fix cta section alignment")
 7. **Section "Let's talk" (CTA):** `.cta-flex { align-items: flex-start }` → `align-items: center` supaya tombol kanan sejajar vertikal dengan teks kiri.
 
+### 2026-08-19 — Audit menyeluruh (commit "update progress: audit penuh")
+8. **Audit seluruh proyek — SEMUA SELARAS:** referensi gambar ✓ · sinkronisasi data inline vs `profile.json` (D & P) ✓ · prompt AI single-source ✓ · ESM konsisten ✓ · meta tag `og.jpg` & tagline HRIS ✓ · tidak ada file temp ✓ · syntax & server E2E ✓
+
 ## ✅ Status Saat Ini
 
 - Website live & sehat; semua perubahan ter-push ke `main`.
