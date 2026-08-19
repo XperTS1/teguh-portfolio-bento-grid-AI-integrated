@@ -71,6 +71,8 @@ node server.js        # lalu buka http://localhost:3000
 
 ## 📋 Todo / Catatan Terbuka
 
-- [ ] (Opsional) PIN Edit Mode dicek di server (keamanan sungguhan, bukan client-side).
-- [ ] (Opsional) Security headers / `vercel.json` (CSP, X-Content-Type-Options, dll).
-- [ ] (Opsional) `og.jpg` cache di WhatsApp/LinkedIn bisa butuh waktu refresh setelah deploy.
+> **Keputusan pemilik (2026-08-19):** item opsional di bawah sudah direview & **diputuskan untuk tidak dikerjakan saat ini** — website statis dengan risiko rendah, dianggap sudah aman-aman saja.
+
+- [ ] (Opsional, ditunda) PIN Edit Mode dicek di server (keamanan sungguhan). Berguna jika kelak edit mode bisa menyimpan langsung ke server.
+- [ ] (Opsional, ditunda) Security headers / `vercel.json` (X-Content-Type-Options, X-Frame-Options, Referrer-Policy). CSP tidak disarankan karena semua CSS/JS inline.
+- [ ] (Catatan) `og.jpg` cache WhatsApp/LinkedIn/Facebook — bukan tugas kode; cache pihak ketiga akan refresh sendiri, atau lewat Sharing Debugger / Post Inspector.
