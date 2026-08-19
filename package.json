@@ -2,6 +2,7 @@
   "name": "teguh-web-portfolio",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "AI-powered bento portfolio for Teguh Saputra Monoarfa (static site + Groq serverless chat).",
   "scripts": {
     "dev": "node server.js",

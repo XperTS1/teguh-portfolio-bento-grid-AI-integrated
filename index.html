@@ -12,14 +12,14 @@
   <meta property="og:url" content="https://teguh-web-portfolio.vercel.app/">
   <meta property="og:title" content="Teguh Web Portfolio">
   <meta property="og:description" content="CX & Operations professional. Ask the built-in AI anything about my experience.">
-  <meta property="og:image" content="https://teguh-web-portfolio.vercel.app/images/og.png">
+  <meta property="og:image" content="https://teguh-web-portfolio.vercel.app/images/og.jpg">
 
   <!-- Twitter / X card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://teguh-web-portfolio.vercel.app/">
   <meta name="twitter:title" content="Teguh Web Portfolio">
   <meta name="twitter:description" content="CX & Operations professional. Ask the built-in AI anything about my experience.">
-  <meta name="twitter:image" content="https://teguh-web-portfolio.vercel.app/images/og.png">
+  <meta name="twitter:image" content="https://teguh-web-portfolio.vercel.app/images/og.jpg">
 
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1380,11 +1380,11 @@
             <h2 id="ai_h" data-k="ai_h" data-html="1"></h2>
             <p class="ai-tag" id="ai_tag" data-k="ai_tag"></p>
             <div class="ai-input">
-              <input id="chatinput" autocomplete="off" maxlength="500">
+              <input id="chatinput" autocomplete="off" maxlength="500" aria-label="Ask the AI assistant about Teguh">
               <button id="chatsend">Ask →</button>
             </div>
             <div class="suggest" id="suggest"></div>
-            <div class="chatbox" id="chatbox"></div>
+            <div class="chatbox" id="chatbox" role="log" aria-live="polite"></div>
           </div>
           <div class="ai-orb"><span class="ring"></span><span class="ring"></span><span class="ring"></span><span
               class="core">✦</span></div>
@@ -1530,7 +1530,7 @@
         "Walk me through his career journey.",
         "What are his biggest professional achievements?"
       ],
-      "ai_ph": "Type your question…  e.g. What are his biggest achievements?",
+      "ai_ph": "Type your question… e.g. What are his biggest achievements?",
       "hero_h1": "<em>HR Operations</em> &amp; HRIS Professional.",
       "role": "HRIS Specialist · Product Consultant & Implementation",
       "bio": "I work at the intersection of HR Operations, HRIS, and business process improvement. My experience spans employee lifecycle management, HRIS implementation, data and process management, and stakeholder collaboration across a B2B SaaS environment. I enjoy turning operational challenges into practical, scalable solutions through better processes, technology, and data while keeping employee experience at the center.",
@@ -1714,7 +1714,7 @@
         }
       ],
       "cta_h": "Let's talk.",
-      "cta_p": "Open to BizOps, CX Ops, Technical Support & AI-Focused Roles - Remote Available",
+      "cta_p": "Open to HR Ops, People Ops, HRIS Implementation & Business Ops",
       "labels": {
         "about": "About",
         "exp": "Experience",
@@ -1731,6 +1731,7 @@
     const EDITABLE = new Set(['brand', 'status', 'hero_h1', 'role', 'bio', 'ai_h', 'ai_tag', 'cta_h', 'cta_p']);
     const HTMLK = new Set(['hero_h1', 'ai_h']);
     const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const escAttr = s => esc(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     const ICON_LOCK = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="11" width="15" height="9.5" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
     const ICON_UNLOCK = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="11" width="15" height="9.5" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-1.3"/></svg>';
 
@@ -1766,7 +1767,7 @@
       const ph = $('photoPh');
       if (P.photo) {
         const pos = P.photoPos || '50% 20%';
-        ph.innerHTML = `<img src="${P.photo}" alt="${esc(P.name)}" style="object-position:${pos}">${editMode ? '<span class="drag-hint">↕ drag to reposition</span>' : ''}`;
+        ph.innerHTML = `<img src="${escAttr(P.photo)}" alt="${esc(P.name)}" style="object-position:${escAttr(pos)}">${editMode ? '<span class="drag-hint">↕ drag to reposition</span>' : ''}`;
         if (editMode) {
           const img = ph.querySelector('img');
           img.classList.add('grabbable');
@@ -1810,7 +1811,7 @@
       // projects
       $('projGrid').innerHTML = D.proj.map((p, i) => {
         const bgPos = p.imgPos || '50% 50%';
-        const cover = p.img ? `style="background-image:url(${p.img});background-position:${bgPos}"` : '';
+        const cover = p.img ? `style="background-image:url(${escAttr(p.img)});background-position:${escAttr(bgPos)}"` : '';
         const hint = (p.img && editMode) ? '<span class="drag-hint">↕ drag to reposition</span>' : '';
         return `<div class="proj">${del('proj', i)}<div class="cap ${editMode ? 'editable' : ''}" data-proj-img="${i}" ${cover}>${p.img ? hint : esc(p.cap)}</div><div class="body"><h4 ${ed('proj', i, 'name')}>${esc(p.name)}</h4><p ${ed('proj', i, 'desc')}>${esc(p.desc)}</p><div class="tag" ${ed('proj', i, 'tag')}>${esc(p.tag)}</div></div></div>`;
       }).join('');
@@ -1973,7 +1974,7 @@
       const typing = document.createElement('div'); typing.className = 'msg bot'; typing.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>'; box.appendChild(typing); box.scrollTop = box.scrollHeight;
       history.push({ role: 'user', content: q });
       try {
-        const res = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history }) });
+        const res = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history.slice(-12) }) });
         const data = await res.json();
         const txt = (data.text || "").trim() || (data.error ? ("⚠ " + data.error) : "Sorry, something went wrong. Try again.");
         typing.remove(); addMsg(txt, 'bot'); history.push({ role: 'assistant', content: txt });
