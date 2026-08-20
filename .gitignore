@@ -16,3 +16,6 @@ Thumbs.db
 
 # local tool output
 graphify-out/
+
+# agent rules (local only - do not commit to repo)
+.agents/
